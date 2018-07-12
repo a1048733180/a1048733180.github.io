@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="equals," />
 
 
 
@@ -86,16 +86,18 @@
 
 
 
-<meta name="description" content="I&apos;m on the way">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Lxy">
-<meta property="og:url" content="http://yoursite.com/archives/2018/03/index.html">
+<meta name="description" content="equals和hashCode都是Object提供的两个方法，equals()方法用于判断两个对象是否相等，hashCode()方法用于计算对象的哈希码，两个方法都不是final方法，可以被重写（OverWrite）">
+<meta name="keywords" content="equals">
+<meta property="og:type" content="article">
+<meta property="og:title" content="equals与hashCode之间的联系">
+<meta property="og:url" content="http://yoursite.com/2018/07/12/equals与hashCode之间的联系/index.html">
 <meta property="og:site_name" content="Lxy">
-<meta property="og:description" content="I&apos;m on the way">
+<meta property="og:description" content="equals和hashCode都是Object提供的两个方法，equals()方法用于判断两个对象是否相等，hashCode()方法用于计算对象的哈希码，两个方法都不是final方法，可以被重写（OverWrite）">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-07-12T08:18:21.631Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Lxy">
-<meta name="twitter:description" content="I&apos;m on the way">
+<meta name="twitter:title" content="equals与hashCode之间的联系">
+<meta name="twitter:description" content="equals和hashCode都是Object提供的两个方法，equals()方法用于判断两个对象是否相等，hashCode()方法用于计算对象的哈希码，两个方法都不是final方法，可以被重写（OverWrite）">
 
 
 
@@ -125,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/archives/2018/03/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/07/12/equals与hashCode之间的联系/"/>
 
 
 
 
 
-  <title>归档 | Lxy</title>
+  <title>equals与hashCode之间的联系 | Lxy</title>
   
 
 
@@ -150,7 +152,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
 	<a href="https://github.com/a1048733180" class="github-corner" aria-label="View source on Github"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
@@ -247,74 +249,224 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
-
-      <span class="archive-page-counter">
-        
-        
-        
-          
-        
-        嗯..! 目前共计 3 篇日志。 继续努力。
-      </span>
-
-      
-
-        
-        
-        
-
-        
-          
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2018">2018</h1>
-          </div>
-        
-        
-
-        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/12/equals与hashCode之间的联系/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Lxy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lxy">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/03/25/Spring-事务管理/" itemprop="url">
-              
-                <span itemprop="name">Spring 事物管理</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">equals与hashCode之间的联系</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-25T22:59:27+08:00"
-              content="2018-03-25" >
-          03-25
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-12T14:07:51+08:00">
+                2018-07-12
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JAVA/" itemprop="url" rel="index">
+                    <span itemprop="name">JAVA</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/07/12/equals与hashCode之间的联系/" class="leancloud_visitors" data-flag-title="equals与hashCode之间的联系">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
+      
 
+      
+        <p>equals和hashCode都是Object提供的两个方法，equals()方法用于判断两个对象是否相等，hashCode()方法用于计算对象的哈希码，两个方法都不是final方法，可以被重写（OverWrite）</p>
+<a id="more"></a>
+<h4 id="equals-方法"><a href="#equals-方法" class="headerlink" title="equals()方法"></a>equals()方法</h4><ul>
+<li>Object类中的equals方法：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object obj)</span></span>&#123;</span><br><span class="line">  <span class="keyword">return</span>(<span class="keyword">this</span> == obj);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看出Object类中的equals方法内部也就是比较两个对象的地址值，即两个对象是否为同一个对象，如果不是同一个，就返回false。</p>
+<p>  虽然我们在定义类时，可以重写equals方法，但是重写该方法有一些必须要遵守的约定：</p>
+<ol>
+<li>自反性：x.equals(x)必须返回true</li>
+<li>对称性：x.equals(y)与y.equals(x)的返回值必须相等</li>
+<li>传递性：x.equals(y)为true，y.equals(z)为true，那么x.equals(z)必须也为true</li>
+<li>一致性：如果对象x和y在equals()中使用的信息都没有改变，那么x.equals(y)的值始终不变</li>
+<li>非null：x不是null,y为null，则x.equals(y)必须为false（y.equals(x)会报空指针异常的错误）</li>
+</ol>
+<h4 id="hashCode-方法"><a href="#hashCode-方法" class="headerlink" title="hashCode()方法"></a>hashCode()方法</h4><ul>
+<li>Object类中的hashCode()方法：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">native</span> <span class="keyword">int</span> <span class="title">hashCode</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+<p>hashCode()是一个native方法，而且返回值类型是整形；实际上，该native方法将对象在内存中的地址作为哈希码返回，可以保证不同对象的返回值不同。</p>
+<p>  重写hashCode（）时，有一些注意事项：</p>
+<ol>
+<li>hashCode()在哈希表中起作用</li>
+<li>如果对象在equals中使用的信息都没有改变，那么hashCode()值也始终不变</li>
+<li>如果两个对象使用equals()方法判断为相等，那么hashCode()也应该为相等</li>
+<li>如果两个对象使用equals()方法判断为不相等时，那么hashCode()方法不一定不相等，但是一般条件下应该让不同的对象产生不同的hashCode()，可以提高哈希表的性能</li>
+</ol>
+<ul>
+<li><p>hashCode()的作用</p>
+<p>当我们向哈希表中添加对象a时，一般先通过计算对象a的哈希码以直接定位在哈希表中的存储位置，如果该位置没有对象，那么可以直接将a插入该位置；如果该位置存在对象，那么根据哈希表的冲突解决，可以将对象a与各个冲突的元素比较，调用equals()进行比较，看是否为true，如果为true，那么不需要保存对象a；否则将对象a加入到哈希表中。</p>
+<p><strong>这里可以看出为什么说equals()相等,hashCode()必须相等</strong>，因为如果你hashCode不相等的话，哈希表会插入到不同的位置，这样会造成一个元素在哈希表中多次出现。</p>
+</li>
+<li><p>默认的重写hashCode()方法使用了数字31</p>
+<ol>
+<li>使用质数计算哈希码，会让它与其他数字相乘后得出的结果唯一性概率较大，这样哈希表冲突的概率就较小。</li>
+<li>使用质数越大，哈希表冲突越小，但是计算的速度可能就会越慢；31是哈希冲突和性能的折中，实际上是实验观测的结果。</li>
+<li>JVM会自动对31进行优化：31* i == (i &lt;&lt; 5) - i</li>
+</ol>
+</li>
+<li><p>重写hashCode()方法的一些原则</p>
+<ol>
+<li>如果重写了equals()方法，那么重写hashCode()方法中用到的域要与equals方法中重写用到的域相同，例如重写了person类中的equals()方法用到了属性年龄age和姓名name，那么hashCode()重写中尽量也用age和name去计算。</li>
+</ol>
+</li>
+</ul>
+
+      
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/equals/" rel="tag"># equals</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/25/Spring-事务管理/" rel="next" title="Spring 事物管理">
+                <i class="fa fa-chevron-left"></i> Spring 事物管理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -322,6 +474,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -342,8 +498,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -403,6 +568,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#equals-方法"><span class="nav-number">1.</span> <span class="nav-text">equals()方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#hashCode-方法"><span class="nav-number">2.</span> <span class="nav-text">hashCode()方法</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -544,6 +725,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
