@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="JAVA," />
 
 
 
@@ -86,17 +86,21 @@
 
 
 
-<meta name="description" content="I&apos;m on the way">
-<meta property="og:type" content="website">
-<meta property="og:title" content="tags">
-<meta property="og:url" content="http://yoursite.com/tags/index.html">
+<meta name="description" content="本文介绍线程的状态">
+<meta name="keywords" content="JAVA">
+<meta property="og:type" content="article">
+<meta property="og:title" content="二. 线程的状态">
+<meta property="og:url" content="http://yoursite.com/2018/07/19/二-线程的状态/index.html">
 <meta property="og:site_name" content="Lxy">
-<meta property="og:description" content="I&apos;m on the way">
+<meta property="og:description" content="本文介绍线程的状态">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-12T05:38:11.048Z">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1689841-af3e5b75b44e972c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://images0.cnblogs.com/i/426802/201406/232002051747387.jpg">
+<meta property="og:updated_time" content="2018-07-19T08:50:45.666Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="tags">
-<meta name="twitter:description" content="I&apos;m on the way">
+<meta name="twitter:title" content="二. 线程的状态">
+<meta name="twitter:description" content="本文介绍线程的状态">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/1689841-af3e5b75b44e972c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -126,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/07/19/二-线程的状态/"/>
 
 
 
 
 
-  <title>tags | Lxy</title>
+  <title>二. 线程的状态 | Lxy</title>
   
 
 
@@ -250,40 +254,207 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/19/二-线程的状态/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Lxy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lxy">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">tags</h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <div class="tag-cloud">
-            <div class="tag-cloud-title">
-                目前共计 6 个标签
-            </div>
-            <div class="tag-cloud-tags">
-              <a href="/tags/JAVA/" style="font-size: 21px; color: #6f6f6f">JAVA</a> <a href="/tags/Spring/" style="font-size: 12px; color: #ccc">Spring</a> <a href="/tags/equals/" style="font-size: 12px; color: #ccc">equals</a> <a href="/tags/多线程/" style="font-size: 30px; color: #111">多线程</a>
-            </div>
-          </div>
+          <h1 class="post-title" itemprop="name headline">二. 线程的状态</h1>
         
-      </div>
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-19T16:39:31+08:00">
+                2018-07-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JAVA多线程/" itemprop="url" rel="index">
+                    <span itemprop="name">JAVA多线程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/07/19/二-线程的状态/" class="leancloud_visitors" data-flag-title="二. 线程的状态">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <p>本文介绍线程的状态</p>
+<a id="more"></a>
+<p><img src="https://upload-images.jianshu.io/upload_images/1689841-af3e5b75b44e972c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p><img src="https://images0.cnblogs.com/i/426802/201406/232002051747387.jpg" alt=""></p>
+<ul>
+<li><p><strong>New</strong>（新建状态）：当线程对象对创建后，即进入了新建状态，如：<code>Thread t = new Thread();</code></p>
+</li>
+<li><p><strong>Runnable</strong>（就绪状态）：当调用线程对象的<code>t.start()</code>方法，(t.start();)，线程即进入就绪状态。处于就绪状态的线程，只是说明此线程已经做好了准备，随时等待cpu调度执行，并不是说执行了t.start()，此线程立即就会执行。</p>
+</li>
+<li><p><strong>Running</strong>（运行状态）：当cpu开始调度处于就绪状态的线程时，此时线程才能得以真正执行，即进入到运行状态，注：就绪状态是进入到运行状态的唯一入口，也就是说，线程要想进入运行状态执行，首先必须处于就绪状态中 </p>
+</li>
+<li><p><strong>Blocked</strong>（阻塞状态）：处于运行状态中的线程由于某种原因，会暂时放弃对cpu的使用权，停止执行，此时进入阻塞状态，直到其进入到就绪状态，才有机会再次被cpu调用以进入到运行状态。</p>
+<ul>
+<li><p>等待阻塞：运行状态中的执行wait()方法，使本线程进入到等待阻塞状态。</p>
+<blockquote>
+<p>调用<code>wait（）</code>，使该线程处<strong>等待池</strong>中（<strong>wait blocked pool</strong>），直到<code>notify()/notifyAll()</code>,该线程被唤醒被放到了<strong>锁定池</strong>（<strong>lock blocked pool</strong>），释放同步锁使线程回到<strong>可运行状态</strong>（<strong>Runnable</strong>），等待cpu的调度。</p>
+</blockquote>
+</li>
+<li><p>同步阻塞：线程在获取<code>synchronized</code>同步锁失败（因为该锁被其它线程占用），它会进入同步阻塞状态。</p>
+</li>
+<li><p>其他阻塞：通过调用线程的<code>sleep（）</code>或<code>join（）</code>或发出I/O请求时，线程会进入阻塞状态。当<code>sleep（）</code>状态超时，<code>join()</code>等待线程终止或者超时、或者I/O处理完毕时，线程重新转入就绪状态。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>Dead</strong>（死亡状态）：线程执行完了或者因异常退出了<code>run（）</code>方法，该线程结束生命周期。</p>
+</li>
+</ul>
+
       
     </div>
     
     
     
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JAVA/" rel="tag"># JAVA</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/19/一-基本概念/" rel="next" title="一. 多线程的基本概念">
+                <i class="fa fa-chevron-left"></i> 一. 多线程的基本概念
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/19/三-各个关键词的用法/" rel="prev" title="三. 各个关键词的用法">
+                三. 各个关键词的用法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -292,6 +463,10 @@
 
 
           
+
+  
+
+
 
         </div>
         

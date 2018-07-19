@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="JAVA," />
+  <meta name="keywords" content="多线程," />
 
 
 
@@ -86,18 +86,21 @@
 
 
 
-<meta name="description" content="下面是一些JAVA多态问题的整理。">
-<meta name="keywords" content="JAVA">
+<meta name="description" content="本文将介绍一些多线程关键词的用法">
+<meta name="keywords" content="多线程">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JAVA多态">
-<meta property="og:url" content="http://yoursite.com/2018/02/16/JAVA多态问题/index.html">
+<meta property="og:title" content="三. 各个关键词的用法">
+<meta property="og:url" content="http://yoursite.com/2018/07/19/三-各个关键词的用法/index.html">
 <meta property="og:site_name" content="Lxy">
-<meta property="og:description" content="下面是一些JAVA多态问题的整理。">
+<meta property="og:description" content="本文将介绍一些多线程关键词的用法">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-12T06:00:47.483Z">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1689841-a8720771d68cb2ba.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1689841-d4ab6cfda7042c67.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-07-19T08:59:18.636Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JAVA多态">
-<meta name="twitter:description" content="下面是一些JAVA多态问题的整理。">
+<meta name="twitter:title" content="三. 各个关键词的用法">
+<meta name="twitter:description" content="本文将介绍一些多线程关键词的用法">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/1689841-a8720771d68cb2ba.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -127,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/02/16/JAVA多态问题/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/07/19/三-各个关键词的用法/"/>
 
 
 
 
 
-  <title>JAVA多态 | Lxy</title>
+  <title>三. 各个关键词的用法 | Lxy</title>
   
 
 
@@ -263,7 +266,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/16/JAVA多态问题/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/19/三-各个关键词的用法/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Lxy">
@@ -280,7 +283,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">JAVA多态</h1>
+          <h1 class="post-title" itemprop="name headline">三. 各个关键词的用法</h1>
         
 
         <div class="post-meta">
@@ -292,8 +295,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-16T16:52:47+08:00">
-                2018-02-16
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-19T16:39:50+08:00">
+                2018-07-19
               </time>
             
 
@@ -315,8 +318,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JAVA/" itemprop="url" rel="index">
-                    <span itemprop="name">JAVA</span>
+                  <a href="/categories/JAVA多线程/" itemprop="url" rel="index">
+                    <span itemprop="name">JAVA多线程</span>
                   </a>
                 </span>
 
@@ -332,7 +335,7 @@
 
           
           
-             <span id="/2018/02/16/JAVA多态问题/" class="leancloud_visitors" data-flag-title="JAVA多态">
+             <span id="/2018/07/19/三-各个关键词的用法/" class="leancloud_visitors" data-flag-title="三. 各个关键词的用法">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -363,42 +366,44 @@
       
 
       
-        <p>下面是一些JAVA多态问题的整理。</p>
+        <p>本文将介绍一些多线程关键词的用法</p>
 <a id="more"></a>
 <ul>
-<li><p>继承</p>
-<p>在多态中必须存在有<strong>继承</strong>关系的的子类和父类</p>
+<li><p><strong>synchronize</strong></p>
+<blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="comment">// 同步代码块</span></span><br><span class="line">&gt; <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Thread1</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</span><br><span class="line">&gt;     Object lock;</span><br><span class="line">&gt;     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</span><br><span class="line">&gt;         <span class="keyword">synchronized</span>(lock)&#123; <span class="comment">// synchronized块中的方法获取了lock实例的monitor，是lock的对象锁</span></span><br><span class="line">&gt;             just to <span class="keyword">do</span> something……</span><br><span class="line">&gt;         &#125;</span><br><span class="line">&gt;     &#125;</span><br><span class="line">&gt; &#125;</span><br><span class="line">&gt; </span><br><span class="line">&gt; <span class="comment">// 直接用于方法上</span></span><br><span class="line">&gt; <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Thread1</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</span><br><span class="line">&gt;     <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123; <span class="comment">// 获取的是Thread1类的monitor,是Thread1的同一对象锁</span></span><br><span class="line">&gt;         just to <span class="keyword">do</span> something……</span><br><span class="line">&gt;     &#125;</span><br><span class="line">&gt; &#125;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>关于<strong>monitor</strong></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1689841-a8720771d68cb2ba.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图片来源网络"></p>
+<p>Java中的每个对象都有一个监视器，来监测并发代码的重入，在非多线程编码时该监视器不发挥作用，反之如果在synchronized 范围内，监视器发挥作用。 </p>
 </li>
-<li><p>重写</p>
-<p>子类对父类中某些方法进行重新定义，在调用方法时就会调用子类的方法</p>
+<li><p><strong>wait、notify、notifyAll</strong></p>
+<blockquote>
+<p>wait/notify必须存在于synchronized块中。并且，这三个关键字针对的是同一个监视器（某对象的监视器）。这意味着wait之后，其他线程可以进入同步块执行。 当某代码并不持有监视器的使用权时（如上图中5的状态，即脱离同步块）去wait或notify，会抛出java.lang.IllegalMonitorStateException。也包括在synchronized块中去调用另一个对象的wait/notify，因为不同对象的监视器不同，同样会抛出此异常。 </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="comment">// synchronized, wait, notify结合:典型场景生产者消费者问题</span></span><br><span class="line">&gt; </span><br><span class="line">&gt; <span class="comment">/**</span></span><br><span class="line"><span class="comment">&gt;    * 生产者生产出来的产品交给店员</span></span><br><span class="line"><span class="comment">&gt;    */</span></span><br><span class="line">&gt; <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">produce</span><span class="params">()</span></span>&#123;</span><br><span class="line">&gt;     <span class="keyword">if</span>(<span class="keyword">this</span>.product &gt;= MAX_PRODUCT)&#123; <span class="comment">// 如果进入该方法，说明产品已经足够了，要进行的是消费产品</span></span><br><span class="line">&gt;         <span class="keyword">try</span>&#123;</span><br><span class="line">&gt;             System.out.println(<span class="string">"产品已经满了，请卖出一些后再生产"</span>);</span><br><span class="line">&gt;             wait(); <span class="comment">// 当前线程释放同步锁对象，并且进入等待池。后续代码不会执行。下面代码作用相同      </span></span><br><span class="line">&gt;         &#125;<span class="keyword">catch</span>(InterruptedException e)&#123;</span><br><span class="line">&gt;             e.printStackTrace();</span><br><span class="line">&gt;         &#125;</span><br><span class="line">&gt;         <span class="keyword">return</span>;</span><br><span class="line">&gt;     &#125;</span><br><span class="line">&gt;     <span class="keyword">this</span>.product++;</span><br><span class="line">&gt;     System.out.println(<span class="string">"生产者生产第"</span>+ <span class="keyword">this</span>.prodect + <span class="string">"个产品"</span>);</span><br><span class="line">&gt;     notifyAll(); <span class="comment">// 通知等待区的消费者可以取出产品了</span></span><br><span class="line">&gt; &#125;</span><br><span class="line">&gt; </span><br><span class="line">&gt;  <span class="comment">/**</span></span><br><span class="line"><span class="comment">&gt;    * 消费者从店员取产品</span></span><br><span class="line"><span class="comment">&gt;    */</span></span><br><span class="line">&gt;   <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">consume</span><span class="params">()</span></span></span><br><span class="line"><span class="function">&gt;   </span>&#123;</span><br><span class="line">&gt;       <span class="keyword">if</span>(<span class="keyword">this</span>.product &lt;= MIN_PRODUCT)</span><br><span class="line">&gt;       &#123;</span><br><span class="line">&gt;           <span class="keyword">try</span> </span><br><span class="line">&gt;           &#123;</span><br><span class="line">&gt;               wait(); </span><br><span class="line">&gt;               System.out.println(<span class="string">"缺货,稍候再取"</span>);</span><br><span class="line">&gt;           &#125; </span><br><span class="line">&gt;           <span class="keyword">catch</span> (InterruptedException e) </span><br><span class="line">&gt;           &#123;</span><br><span class="line">&gt;               e.printStackTrace();</span><br><span class="line">&gt;           &#125;</span><br><span class="line">&gt;           <span class="keyword">return</span>;</span><br><span class="line">&gt;       &#125;</span><br><span class="line">&gt; </span><br><span class="line">&gt;       System.out.println(<span class="string">"消费者取走了第"</span> + <span class="keyword">this</span>.product + <span class="string">"个产品."</span>);</span><br><span class="line">&gt;       <span class="keyword">this</span>.product--;</span><br><span class="line">&gt;       notifyAll();   <span class="comment">// 通知等待去的生产者可以生产产品了</span></span><br><span class="line">&gt;   &#125;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>&gt;</p>
+<blockquote>
+<p>注意事项：</p>
+<ol>
+<li><code>wait()</code> 方法执行后，当前线程立即进入到等待阻塞状态，其后面代码不会执行。</li>
+<li><code>notify()/notifyAll()</code>方法执行后，将唤醒此等待池中的等待线程对象，<strong>并将唤醒的线程对象放入就绪状态中，由CPU调度，而并非直接进入运行状态，</strong>（<code>notify</code>是唤醒等待池中的任意一个线程；而<code>notifyAll是唤醒等待池中全部线程</code> ），唤醒完线程对象后，<strong>同步锁对象</strong>还未释放，如果<code>notify/notifyAll</code>后还有代码的话，会继续执行后续代码，执行完毕后当前线程才会释放<strong>同步锁对象</strong>。</li>
+<li><code>notify()/notifyAll()</code>执行后，如果后续代码有<code>sleep()</code>方法，那么该线程会进入阻塞状态，但是同步锁对象不会释放，依然自己保留，等<code>sleep()</code>时间到后该线程继续执行后续代码，同2一样。</li>
+<li><code>wait()/notify()/notifyAll()</code>完成线程间的通信都是基于相同对象锁的，如果是不同对象的不同对象锁，是没有作用的。所以，同步对象锁最好是与共享资源对象保持一一对应关系 。</li>
+<li><strong>当wait线程唤醒后并执行时，是接着上次执行到的wait()方法代码后面继续往下执行的。</strong></li>
+</ol>
+</blockquote>
 </li>
-<li><p>向上转型</p>
-<p>在多态中需要将子类的引用赋给父类对象，只有这样该引用才能够具备技能调用父类的方法和子类的方法（继承也可以是实现接口）</p>
-</li>
-<li><p>向下转型</p>
-<p>前提是父类对象指向子类对象，可以理解为向下转型之前，它得先向上转型，向下转型只能转型为本类对象</p>
+<li><p><strong>volatile</strong></p>
+<blockquote>
+<p>volatile关键词的作用：每次针对该变量的操作都激发一次load and save。</p>
+<p>关于load and save</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1689841-d4ab6cfda7042c67.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>多线程的内存模型：main memory（主存）、working memory（线程栈），在处理数据时，线程会把值从主存load到本地栈，完成操作后再save回去。</p>
+<p>针对多线程使用的变量如果不是volatile或者final修饰的，很有可能产生不可预知的结果（另一个线程修改了这个值，但是之后在某线程看到的是修改之前的值）。其实道理上讲同一实例的同一属性本身只有一个副本。但是多线程是会缓存值的，本质上，volatile就是不去缓存，直接取值。在线程安全的情况下加volatile会牺牲性能。  </p>
+</blockquote>
 </li>
 </ul>
-<p>经典案例</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">show</span><span class="params">(D obj)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (<span class="string">"A and D"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">show</span><span class="params">(A obj)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span>(<span class="string">"A and A"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> <span class="keyword">extends</span> <span class="title">A</span></span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">show</span><span class="params">(B obj)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span>(<span class="string">"B and B"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">show</span><span class="params">(A obj)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span>(<span class="string">"B and A"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span> <span class="keyword">extends</span> <span class="title">B</span></span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">D</span> <span class="keyword">extends</span> <span class="title">B</span></span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo</span></span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">    A a1 = <span class="keyword">new</span> A();</span><br><span class="line">    A a2 = <span class="keyword">new</span> B();</span><br><span class="line">    B b = <span class="keyword">new</span> B();</span><br><span class="line">    C c = <span class="keyword">new</span> C();</span><br><span class="line">    D d = <span class="keyword">new</span> D();</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    System.out.println(<span class="string">"1--"</span> + a1.show(b));</span><br><span class="line">    System.out.println(<span class="string">"2--"</span> + a1.show(c));</span><br><span class="line">    System.out.println(<span class="string">"3--"</span> + a1.show(d));</span><br><span class="line">    System.out.println(<span class="string">"4--"</span> + a2.show(b));</span><br><span class="line">    System.out.println(<span class="string">"5--"</span> + a2.show(c));</span><br><span class="line">	System.out.println(<span class="string">"6--"</span> + a2.show(d));</span><br><span class="line">    System.out.println(<span class="string">"7--"</span> + b.show(b));</span><br><span class="line">    System.out.println(<span class="string">"8--"</span> + b.show(c));</span><br><span class="line">    System.out.println(<span class="string">"9--"</span> + b.show(d));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">运行结果为</span><br><span class="line">1-- A and A</span><br><span class="line">2-- A and A</span><br><span class="line">3-- A and D</span><br><span class="line">4-- B and A</span><br><span class="line">5-- B and A</span><br><span class="line">6-- A and D</span><br><span class="line">7-- B and B</span><br><span class="line">8-- B and B</span><br><span class="line">9-- A and D</span><br></pre></td></tr></table></figure>
-<p>   <strong>当父类对象引用变量引用子类对象时，被引用对象的类型决定了调用谁的成员方法，引用变量类型决定可调用的方法。如果子类中没有覆盖该方法，那么会去父类中寻找。</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">X</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">(Y y)</span></span>&#123;</span><br><span class="line">       System.out.println(<span class="string">"x and y"</span>);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">()</span></span>&#123;</span><br><span class="line">       System.out.println(<span class="string">"only x"</span>);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Y</span> <span class="keyword">extends</span> <span class="title">X</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">(Y y)</span></span>&#123;</span><br><span class="line">       System.out.println(<span class="string">"y and y"</span>);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">(<span class="keyword">int</span> i)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">main</span></span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">       X x = <span class="keyword">new</span> Y();</span><br><span class="line">       x.show(<span class="keyword">new</span> Y());</span><br><span class="line">       x.show();</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">运行结果</span><br><span class="line">y and y</span><br><span class="line">only x</span><br></pre></td></tr></table></figure>
-<p>Y继承了X，覆盖了X中的show（Y y)方法，但是没有覆盖show（）方法。</p>
-<p>这个时候，引用类型为X的x指向的对象为Y，这个时候，调用的方法由Y决定，会先从Y中寻找。执行x.show(new Y());，该方法在Y中定义了，所以执行的是Y里面的方法；</p>
-<p>但是执行x.show();的时候，有的人会说，Y中没有这个方法啊？它好像是去父类中找该方法了，因为调用了X中的方法。</p>
-<p>事实上，Y类中是有show（）方法的，这个方法继承自X，只不过没有覆盖该方法，所以没有在Y中明确写出来而已，看起来像是调用了X中的方法，实际上调用的还是Y中的。</p>
-<p>X x = new Y();</p>
-<p><strong>X 决定能调用的方法，show（）和show(Y y)可以调用，而show(int i)不可以调用。Y 决定调用哪个方法；若Y调用的方法在X中没有体现出来，如show(int i)，则会报错</strong></p>
-<h3 id="关于调用优先级"><a href="#关于调用优先级" class="headerlink" title="关于调用优先级"></a>关于调用优先级</h3><p>继承链中对象方法的调用的优先级：this.show(O)、super.show(O)、this.show((super)O)、super.show((super)O)。</p>
-<p>分析经典例子中的第4– <strong>a2.show(b)</strong>     B b </p>
-<p>A a2 = new B();</p>
-<p>由类A中可知可以调用的方法有show(D obj) 和show(A obj)；按照调用优先级，现在B中查找show(B obj),找到了，但是没用，因为不在调用方法内（A中没有该方法） ，所以this.show(B obj)失败；接下来是下一级别：super.show(O),super指的是A，（因为B继承A），在A中寻找show(B obj)也失败，因为没有定义；下一级别：this.show(<strong>super(O)</strong>),这里的this指的时B，<strong>super(O)</strong>在这里是<strong>super(B obj)</strong>，即this.show(<strong>A obj</strong>)，在B中找到该方法，所以调用该方法输出：B and A</p>
-<p>第9– b.show(d)</p>
-<p>因为B b = new B() </p>
-<p>b为类型为B的引用对象，指向类型为B的对象，所以不存在向上转型，只会调用本类中的方法</p>
-<p>在B中寻找show(D obj),在B中虽然没看到show(D obj),但是因为B继承A，而在A中有show(D obj),所以B中自然也会有该方法，因为在B中没有重写show(D obj)，所以一般情况不明确写出来。</p>
 
       
     </div>
@@ -416,7 +421,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/JAVA/" rel="tag"># JAVA</a>
+            <a href="/tags/多线程/" rel="tag"># 多线程</a>
           
         </div>
       
@@ -429,14 +434,18 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2018/07/19/二-线程的状态/" rel="next" title="二. 线程的状态">
+                <i class="fa fa-chevron-left"></i> 二. 线程的状态
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/03/25/Spring-事务管理/" rel="prev" title="Spring 事物管理">
-                Spring 事物管理 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/07/19/四-创建线程方式/" rel="prev" title="四. 创建线程方式">
+                四. 创建线程方式 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -489,17 +498,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -559,22 +559,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#关于调用优先级"><span class="nav-number">1.</span> <span class="nav-text">关于调用优先级</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
