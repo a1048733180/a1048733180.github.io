@@ -98,9 +98,9 @@
 <meta property="og:image" content="https://images0.cnblogs.com/blog/288799/201408/241028044719452.jpg">
 <meta property="og:image" content="https://images0.cnblogs.com/blog/288799/201408/241029514406632.jpg">
 <meta property="og:image" content="https://images0.cnblogs.com/blog/288799/201408/241031330495608.jpg">
-<meta property="og:image" content="f:/一些笔记/JAVA%20多线程/pic/241034465033208.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/08/08/5b6a59b495abc.jpg">
 <meta property="og:image" content="https://images0.cnblogs.com/blog/288799/201408/241038005189081.jpg">
-<meta property="og:updated_time" content="2018-07-19T09:20:33.480Z">
+<meta property="og:updated_time" content="2018-08-08T02:48:06.063Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="五. 多线程包">
 <meta name="twitter:description" content="本文将介绍一些多线程包。">
@@ -387,7 +387,7 @@
 <p><img src="https://images0.cnblogs.com/blog/288799/201408/241031330495608.jpg" alt=""></p>
 <p>可以看到ThreadLocalMap的Entry继承了WeakReference，并且使用ThreadLocal作为键值。</p>
 <p>然后再继续看setInitialValue方法的具体实现：</p>
-<p><img src="F:\一些笔记\JAVA 多线程\pic\241034465033208.jpg" alt=""></p>
+<p><img src="https://i.loli.net/2018/08/08/5b6a59b495abc.jpg" alt=""></p>
 <p>　　很容易了解，就是如果map不为空，就设置键值对，为空，再创建Map，看一下createMap的实现：</p>
 <p><img src="https://images0.cnblogs.com/blog/288799/201408/241038005189081.jpg" alt=""></p>
 <p>　 首先，在每个线程<strong>Thread</strong>内部有一个<strong>ThreadLocal.ThreadLocalMap</strong>类型的成员变量<strong>threadLocals</strong>，这个threadLocals就是用来存储实际的变量副本的，键值为当前ThreadLocal变量，value为变量副本（即T类型的变量）。</p>

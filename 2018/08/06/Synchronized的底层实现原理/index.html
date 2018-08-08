@@ -94,12 +94,12 @@
 <meta property="og:site_name" content="Lxy">
 <meta property="og:description" content="本文简单描述Synchronized的一些实现方式和底层的原理">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="f:/一些笔记/JAVA%20多线程/pic/640.jpg">
-<meta property="og:updated_time" content="2018-08-06T08:40:18.468Z">
+<meta property="og:image" content="https://i.loli.net/2018/08/08/5b6a57a13eee0.jpg">
+<meta property="og:updated_time" content="2018-08-08T02:39:20.857Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Synchronized的底层实现原理">
 <meta name="twitter:description" content="本文简单描述Synchronized的一些实现方式和底层的原理">
-<meta name="twitter:image" content="f:/一些笔记/JAVA%20多线程/pic/640.jpg">
+<meta name="twitter:image" content="https://i.loli.net/2018/08/08/5b6a57a13eee0.jpg">
 
 
 
@@ -412,7 +412,7 @@
 </blockquote>
 <p>当多个线程同时访问一段同步代码时，首先会进入<code>_EntryList</code>队列中，当某个线程获取到对象的monitor后进入<code>_Owner</code>区域并把monitor中的<code>_owner</code>变量设置为当前线程，同时monitor中的计数器<code>_count</code>加1。即获得对象锁。</p>
 <p>若持有monitor的线程调用<code>wait()</code>方法，将释放当前持有的monitor，<code>_owner</code>变量恢复为<code>null</code>，<code>_count</code>自减1，同时该线程进入<code>_WaitSet</code>集合中等待被唤醒。若当前线程执行完毕也将释放monitor(锁)并复位变量的值，以便其他线程进入获取monitor(锁)。</p>
-<p><img src="F:\一些笔记\JAVA 多线程\pic\640.jpg" alt=""></p>
+<p><img src="https://i.loli.net/2018/08/08/5b6a57a13eee0.jpg" alt=""></p>
 
       
     </div>
