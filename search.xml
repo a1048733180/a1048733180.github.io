@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[JAVA中整型的范围]]></title>
+    <url>%2F2018%2F09%2F06%2Fjava%E4%B8%AD%E6%95%B4%E5%9E%8B%E7%9A%84%E8%8C%83%E5%9B%B4%2F</url>
+    <content type="text"><![CDATA[主题：java中整型的范围 概括 类型 数据位 范围 byte 8 -128 ~ 127 ( -2^7^ ~ 2^7^-1) short 16 -32 768 ~ 32 767 ( -2^15^ ~ 2^15^-1) int 32 -2 147 483 648 ~ 2 147 483 647 ( -2^31^ ~ 2^31^-1) long 64 -9 233 372 036 854 477 808 ~ 9 233 372 036 854 477 807 ( -2^63^ ~ 2^63^-1) 为什么范围是 -2^7^ ~ 2^7^-1计算机对于数字的运算是通过补码来表示二进制数的。 假设现在有一个长度为4位的二进制数，那么它能表达的数字转换成十进制有16个 十进制 二进制 分割线 十进制 二进制 0 0000 / 8 1000 1 0001 / 9 1001 2 0010 / 10 1010 3 0011 / 11 1011 4 0100 / 12 1100 5 0101 / 13 1101 6 0110 / 14 1110 7 0111 / 15 1111 这里都是正数，那如果存在负数呢 那么这时候我们把最高移位当成是符号位，正数的符号位为0，负数的符号位为1。一个长度为4位的二进制数能表达的数有 十进制 二进制 分割线 十进制 二进制 0 0/000 / -8 1/000 1 0/001 / -7 1/001 2 0/010 / -6 1/010 3 0/011 / -5 1/011 4 0/100 / -4 1/100 5 0/101 / -3 1/101 6 0/110 / -2 1/110 7 0/111 / -1 1/111 注：这里的数字都是采用补码表示，正数的补码是本身，负数的补码是除去符号位后取反加1。 当你采用最高位位符号位进行计算时，有效数字只剩下3位，正0当作是0，负0当作是-8（即-2^4-1^），所以可以知道长度为4位的二进制数中，如果也要表达符号，那么范围就是[ -2^3^ ~ 2^3^-1] 这样就可以理解java中byte类型的数据范围为什么是 [ -2^7^ ~ 2^7^-1 ]，int类型的数据范围为什么是[ -2^31^ ~ 2^31^-1 ],以此类推。]]></content>
+      <categories>
+        <category>JAVA</category>
+        <category>SE</category>
+      </categories>
+      <tags>
+        <tag>JAVA</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[web.xml之头声明]]></title>
     <url>%2F2018%2F08%2F29%2Fweb-xml%E4%B9%8B%E5%A4%B4%E5%A3%B0%E6%98%8E%2F</url>
     <content type="text"><![CDATA[主题：web.xml头部声明的一些坑 servlet 3.1 Java EE 7 XML schema，命名空间是 http://xmlns.jcp.org/xml/ns/javaee/ 12345678&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1"&gt;&lt;/web-app&gt; servlet 3.0Java EE 6 XML schema，命名空间是 http://java.sun.com/xml/ns/javaee 12345678&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0"&gt;&lt;/web-app&gt; servlet 2.5Java EE 5 XML schema，命名空间是 http://java.sun.com/xml/ns/javaee 12345678&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5"&gt;&lt;/web-app&gt; servlet 2.4Java EE 1.4 XML schema, 命名空间是 http://java.sun.com/xml/ns/j2ee 12345678&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;web-app xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd" version="2.4"&gt;&lt;/web-app&gt; servlet的不同版本会有不同的web.xml头部声明 ==可以看出2.4和2.5,3.0大概一致，不过一个是j2ee,一个是javaee。== 而从3.1以后，命名空间改成了 http://xmlns.jcp.org/xml/ns/javaee/ 所以在使用框架集成时要注意一些版本的坑，像async-supported 是在3.0之后才有的新特性。]]></content>
