@@ -89,7 +89,7 @@
 <meta property="og:description" content="序最近在看周志明的《深入理解JAVA虚拟机》，然后看到一些关于常量池的问题，记录一下自己的所得所感。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.loli.net/2018/10/16/5bc536e2993d8.jpg">
-<meta property="og:updated_time" content="2018-10-16T01:04:58.744Z">
+<meta property="og:updated_time" content="2018-10-16T01:07:52.361Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="String的intern理解">
 <meta name="twitter:description" content="序最近在看周志明的《深入理解JAVA虚拟机》，然后看到一些关于常量池的问题，记录一下自己的所得所感。">
@@ -401,6 +401,8 @@
             <div class="post-wordcount">
               
                 
+                  <span class="post-meta-divider">|</span>
+                
                 <span class="post-meta-item-icon">
                   <i class="fa fa-file-word-o"></i>
                 </span>
@@ -408,24 +410,12 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,974
+                  1,974 字
                 </span>
               
 
               
-                <span class="post-meta-divider">|</span>
-              
 
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  8
-                </span>
               
             </div>
           
@@ -469,8 +459,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">String aa = <span class="keyword">new</span> String(<span class="string">"A"</span>)+<span class="keyword">new</span> String(<span class="string">"A"</span>);</span><br><span class="line">String temp = aa.intern();</span><br><span class="line">String a = <span class="string">"AA"</span>;</span><br><span class="line"></span><br><span class="line">System.out.println(a == temp);</span><br><span class="line">System.out.println(aa == temp);</span><br></pre></td></tr></table></figure>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在 jdk1.7 之前</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 1、创建了4个对象，2个堆对象+1个合并后的堆对象+1个字符串"A"对象（在常量池中）</span></span><br><span class="line"><span class="comment"> * 2、此时的常量池只有“A”字符串对象。</span></span><br><span class="line"><span class="comment"> * 3、引用aa指向的堆地址为合并后的对象，内容为“AA”。</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">String aa = <span class="keyword">new</span> String(<span class="string">"A"</span>)+<span class="keyword">new</span> String(<span class="string">"A"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 1、此时intern（）方法同样会先查找常量池中是否有跟对象一样内容的对象（就是在常量池中查找是否有“AA”</span></span><br><span class="line"><span class="comment"> * 字符串），由第一条代码的分析可知这个时候常量池中只有字符串为“A”的对象，此时在jdk1.7之前的版本中，</span></span><br><span class="line"><span class="comment"> * 会将堆中对象的字符串拷贝一份过去，然后返回该字符串的地址值。（我的理解是 常量池添加“AA”这个字符串对</span></span><br><span class="line"><span class="comment"> * 象，然后返回改地址值，类似String x = "AA")</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">String temp = aa.intern();</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 由第二条代码的分析可知此时常量池中已经有字符串“AA”对象，所以直接返回地址值给引用a</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">String a = <span class="string">"AA"</span>;</span><br><span class="line"></span><br><span class="line">System.out.println(a == temp); <span class="comment">// true</span></span><br><span class="line">System.out.println(aa == temp); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在 jdk 1.7 之后</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 1、创建了4个对象，2个堆对象+1个合并后的堆对象+1个字符串"A"对象（在常量池中）</span></span><br><span class="line"><span class="comment"> * 2、此时的常量池只有“A”字符串对象（此处在常量池中不会生成字符串AA对象，而只有一个字符串A对象）。</span></span><br><span class="line"><span class="comment"> * 3、引用aa指向的堆地址为合并后的对象，内容为“AA”。</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">String aa = <span class="keyword">new</span> String(<span class="string">"A"</span>)+<span class="keyword">new</span> String(<span class="string">"A"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 1、此时intern（）方法同样会先查找常量池中是否有跟对象一样内容的对象（就是在常量池中查找是否有“AA”</span></span><br><span class="line"><span class="comment"> * 字符串），由第一条代码的分析可知这个时候常量池中只有字符串为“A”的对象，此时在jdk1.7之后的版本中，</span></span><br><span class="line"><span class="comment"> * 不再是将堆对象的字符串拷贝一份过去，而是将堆对象的地址值存储在常量池中，然后返回该地址值。（假如此</span></span><br><span class="line"><span class="comment"> * 时aa指向的地址值为0x1001,那么常量池中表示字符串"AA"对象的地址值也是0x1001)</span></span><br><span class="line"><span class="comment"> * 注：在常量池中并没有实际生成字符串“AA”，而只是生成对堆中字符串为“AA”的对象的引用。（就是一个地</span></span><br><span class="line"><span class="comment"> * 址值，然后可以理解这个地址值就是代表字符串“AA”）</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">String temp = aa.intern();</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 由第二条代码的分析可知此时常量池中已经有字符串“AA”对象，所以直接返回地址值给引用a</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">String a = <span class="string">"AA"</span>;</span><br><span class="line"></span><br><span class="line">System.out.println(a == temp); <span class="comment">// true</span></span><br><span class="line">System.out.println(aa == temp); <span class="comment">// true,这里与之前都不同，是因为常量池中的地址值就是堆对象的地址值，也是 jdk 1.7 后intern()方法的改变</span></span><br></pre></td></tr></table></figure>
-<p>###4、关于String新建对象的一些理解</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String s1=<span class="keyword">new</span> String(<span class="string">"abc"</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="4、关于String新建对象的一些理解"><a href="#4、关于String新建对象的一些理解" class="headerlink" title="4、关于String新建对象的一些理解"></a>4、关于String新建对象的一些理解</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String s1=<span class="keyword">new</span> String(<span class="string">"abc"</span>);</span><br></pre></td></tr></table></figure>
 <p>s1是栈内变量，它的内存保存的是堆中的new String对象的地址，new String在堆中生成对象，并用常量池的字符串对象”abc”初始化堆中的对象，<strong>所以堆中的对象的内存的内容和常量池对象的内存的内容一样，但是是不同的两个对象</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String s1 = <span class="string">"abc"</span>;</span><br></pre></td></tr></table></figure>
 <p>s1是一个栈内变量，运行这一行代码后会先在常量池中查找是否存在值为<code>abc</code>的字符串对象，如果存在那么直接返回字符串对象的地址值；如果在常量池中不存在值为<code>abc</code>的字符串对象，那么就会在常量池中新建一个值为<code>abc</code>的字符串对象，然后返回其地址值给引用s1。</p>
@@ -666,7 +655,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#序"><span class="nav-number">1.</span> <span class="nav-text">序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、静态常量池"><span class="nav-number">1.1.</span> <span class="nav-text">1、静态常量池</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、动态常量池"><span class="nav-number">1.2.</span> <span class="nav-text">2、动态常量池</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、关于String的intern方法"><span class="nav-number">1.3.</span> <span class="nav-text">3、关于String的intern方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#完"><span class="nav-number">2.</span> <span class="nav-text">完</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#序"><span class="nav-number">1.</span> <span class="nav-text">序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、静态常量池"><span class="nav-number">1.1.</span> <span class="nav-text">1、静态常量池</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、动态常量池"><span class="nav-number">1.2.</span> <span class="nav-text">2、动态常量池</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、关于String的intern方法"><span class="nav-number">1.3.</span> <span class="nav-text">3、关于String的intern方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、关于String新建对象的一些理解"><span class="nav-number">1.4.</span> <span class="nav-text">4、关于String新建对象的一些理解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#完"><span class="nav-number">2.</span> <span class="nav-text">完</span></a></li></ol></div>
             
 
           </div>
@@ -1197,7 +1186,7 @@
 
   
   <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
-  <script>AV.initialize("", "");</script>
+  <script>AV.initialize("hFljGukYIc7JOcChRYatWqjw-gzGzoHsz", "nzLi8445Vz7wgi5H7If96ISI");</script>
   <script>
     function showTime(Counter) {
       var query = new AV.Query(Counter);
