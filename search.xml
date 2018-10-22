@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[测试页面]]></title>
     <url>%2F2018%2F10%2F22%2F%E6%B5%8B%E8%AF%95%E9%A1%B5%E9%9D%A2%2F</url>
-    <content type="text"></content>
+    <content type="text"><![CDATA[很难受]]></content>
   </entry>
   <entry>
     <title><![CDATA[String的intern理解]]></title>
