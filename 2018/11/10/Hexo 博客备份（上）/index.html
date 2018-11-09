@@ -6,18 +6,30 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https:www.luoxy.top">
-  <title>Category: JAVA WEB | Lxy&#39;s Blog</title>
+  <title>Hexo 博客备份（上） | Lxy&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="努力成为一个『不那么差』的程序员">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Lxy&#39;s Blog">
-<meta property="og:url" content="https:www.luoxy.top/categories/JAVA-WEB/index.html">
+  <meta name="description" content="序不知道写什么，所以就随便写了一点，然后之前也想过怎么把博客迁移这个问题，所以今天通过查资料，最后知道了一些做法。这篇文章说的就是博客备份迁移的做法。">
+<meta name="keywords" content="hexo,blog">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo 博客备份（上）">
+<meta property="og:url" content="https:www.luoxy.top/2018/11/10/Hexo 博客备份（上）/index.html">
 <meta property="og:site_name" content="Lxy&#39;s Blog">
-<meta property="og:description" content="努力成为一个『不那么差』的程序员">
+<meta property="og:description" content="序不知道写什么，所以就随便写了一点，然后之前也想过怎么把博客迁移这个问题，所以今天通过查资料，最后知道了一些做法。这篇文章说的就是博客备份迁移的做法。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.loli.net/2018/11/10/5be5b3cda81d2.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/11/09/5be59a58d3cba.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/11/09/5be59d21506aa.png">
+<meta property="og:image" content="https://i.loli.net/2018/11/09/5be59db3b4875.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/11/09/5be59f3c9f827.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/11/09/5be5a0b9771cb.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/11/09/5be5a1e1cba0b.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/11/09/5be5a2558bdd5.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/11/09/5be5a5956c2b0.png">
+<meta property="og:updated_time" content="2018-11-09T16:30:44.374Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Lxy&#39;s Blog">
-<meta name="twitter:description" content="努力成为一个『不那么差』的程序员">
+<meta name="twitter:title" content="Hexo 博客备份（上）">
+<meta name="twitter:description" content="序不知道写什么，所以就随便写了一点，然后之前也想过怎么把博客迁移这个问题，所以今天通过查资料，最后知道了一些做法。这篇文章说的就是博客备份迁移的做法。">
+<meta name="twitter:image" content="https://i.loli.net/2018/11/10/5be5b3cda81d2.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Lxy&#39;s Blog" type="application/atom+xml">
   
@@ -141,185 +153,177 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Hexo 博客备份（上）" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Hexo 博客备份（上）
+    </h1>
+  
+
+        
+        <a href="/2018/11/10/Hexo 博客备份（上）/" class="archive-article-date">
+  	<time datetime="2018-11-09T16:12:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-10</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="https://i.loli.net/2018/11/10/5be5b3cda81d2.jpg" alt="65523740_p0.jpg"></p>
+<h2 id="序"><a href="#序" class="headerlink" title="序"></a>序</h2><p>不知道写什么，所以就随便写了一点，然后之前也想过怎么把博客迁移这个问题，所以今天通过查资料，最后知道了一些做法。这篇文章说的就是博客备份迁移的做法。</p>
+<a id="more"></a>
+<h3 id="1、前提"><a href="#1、前提" class="headerlink" title="1、前提"></a>1、前提</h3><ul>
+<li>Hexo + Github Page</li>
+<li>本地博客文件（即 hexo init 生成的文件）</li>
+<li>要在不同的环境下操作博客</li>
+<li>未来要更换环境提前做好备份</li>
+</ul>
+<h3 id="2、思路"><a href="#2、思路" class="headerlink" title="2、思路"></a>2、思路</h3><p>其实通俗点说 hexo 就是把本地的 md 文件渲染成静态页面，然后上传到 Github 托管生成博客，理论上说如果你换个电脑的话，可以把原电脑的 hexo 配置文件拷贝到新电脑，然后稍稍修改也能达到目的；所以问题就是这些配置文件怎么拷贝的新电脑，这里可以采用 git 的方式把重要的配置文件上传到 Github 的博客仓库中，改变一下分支，就能做到主分支存放生成的静态页面，另一个分支存放 hexo 的配置文件。</p>
+<h3 id="3、操作"><a href="#3、操作" class="headerlink" title="3、操作"></a>3、操作</h3><p>这里怎么搭建博客就不多说了，百度搜索 GithubPage + Hexo 就有很多教程了。</p>
+<p>搭建完的本地配置文件如下图，接下来说到的配置文件就是这些</p>
+<p><img src="https://i.loli.net/2018/11/09/5be59a58d3cba.jpg" alt="一.jpg"></p>
+<p>接下来讲讲如何操作</p>
+<ul>
+<li><p>先找一个空目录，当然你也可以直接在任意一个目录。我这里的空目录是 Hexo 2.0 ，然后把你 Github 上的博客仓库（xxx/xxx.github.io）内容复制到本地</p>
+<p><img src="https://i.loli.net/2018/11/09/5be59d21506aa.png" alt="二.png"></p>
+</li>
+</ul>
+<p>  采用 git 把仓库内容克隆下来，然后删除文件中除了 <strong>.git</strong> 以外的所有文件，并且把本地博客的配置文件里面的所有文件复制过来，复制过程会比较慢，所以说不建议直接复制这些配置文件到新环境，而采用 git </p>
+<p>  这里还有个地方要注意，因为 clone 下来的仓库时一个文件名 xxx.github.io 的文件，所以要进入这个文件里面，再复制</p>
+<p>  <img src="https://i.loli.net/2018/11/09/5be59db3b4875.jpg" alt="三.jpg"></p>
+<p>  最后复制完 Hexo 2.0 的目录结果如下，注意：这里的文件是 Hexo 2.0 ，也就是我新建的文件里面</p>
+<p>  <img src="https://i.loli.net/2018/11/09/5be59f3c9f827.jpg" alt="四.jpg"></p>
+<ul>
+<li><p>完成复制后，现在的文件夹就含有原本 Hexo 的配置文件了，接下来就是把这些配置文件上传的 Github 上</p>
+</li>
+<li><p>之前讲过上传的 Github上时采用不同的分支，所以先在本地新建一个 hexo 分支，专门用来存放 Hexo 配置文件的。</p>
+<p><img src="https://i.loli.net/2018/11/09/5be5a0b9771cb.jpg" alt="1541775533(1).jpg"></p>
+</li>
+</ul>
+<p>  这里报错了，因为我们 clone 下来的仓库还有一个文件名 xxx.github.io ，这个才是可以操作的 git 文件，所以要进入那个文件里面。cd 进入后会发现默认是 master 分支。</p>
+<p>  <img src="https://i.loli.net/2018/11/09/5be5a1e1cba0b.jpg" alt="1541775820(1).jpg"></p>
+<p>  创建新分支，分支名为 hexo </p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b hexo</span><br></pre></td></tr></table></figure>
+<p>  可以看到已经切换到了 hexo 分支</p>
+<p>  <img src="https://i.loli.net/2018/11/09/5be5a2558bdd5.jpg" alt="1541775950(1).jpg"></p>
+<ul>
+<li><p>接下来就是把所有文件上传到 Github 上了，步骤就是 add、commit、push这些。但是，这里有个坑，就是如果你的博客主题（在文件 themes 下面）。如果主题是通过 clone 下来的话，（通过查看主题文件是否带有 .git 判断，如果有的话就是通过 clone 下来的），要先把  <strong>.git</strong> 删除了，要不然后面你就会发现迁移后主题文件都是空的，你原本的那些主题配置就都不见了，会添加很多不必要的麻烦。所以这里把 <strong>.git</strong> 给删除了</p>
+<p><img src="https://i.loli.net/2018/11/09/5be5a5956c2b0.png" alt="1541776778(1).png"></p>
+</li>
+</ul>
+<ul>
+<li><p>删除后，就上传到 Github 上，这里要先在远端的 Github创建一个 hexo 分支，然后把内容上传到该分支</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add --all </span><br><span class="line">git commit -m <span class="string">"添加资源备份文件"</span></span><br><span class="line">git push --set-upstream origin hexo <span class="comment">// 这里 hexo 是你的分支名</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>操作完成后就可以在 Github 上查看到自己添加的分支了，以及分支的内容，因为在 .gitignore 中有去除不上传的文件，所以并不是所有的文件都会被上传到 Github 上。</p>
+</li>
+<li><p>上传完成后，配置文件也算是备份完成了，以后在新环境使用时，直接把 hexo 分支下的仓库 clone 到本地，然后配置 hexo 的一些依赖就能使用了。</p>
+</li>
+</ul>
+<h3 id="4、建议"><a href="#4、建议" class="headerlink" title="4、建议"></a>4、建议</h3><p>如果是在同一台电脑，但是为了预防未来换电脑或者换个环境而进行备份的，通过这种操作进行备份的话，以后写博客可以在 Hexo 2.0 里面进行操作，也可以在原本的博客目录进行操作；但是 Hexo 2.0 才是与远端 Github 存放的配置文件对应，所以如果有更改主题样式或者其他一些操作的话，别忘了把对 Hexo2.0 的更改 push 到远端。而对于博客的基本命令，例如 <strong>hexo -g 、hexo -s、 hexo -d</strong> 都还是一样的。</p>
+<h2 id="完"><a href="#完" class="headerlink" title="完"></a>完</h2><blockquote>
+<p>努力成为一个『不那么差』的程序员 </p>
+</blockquote>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/10/04/springboot-2-0-集成redis/" class="archive-article-date">
-  	<time datetime="2018-10-04T02:59:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-04</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/10/04/springboot-2-0-集成redis/">Springboot 2.0 - 集成redis</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">SpringBoot</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Redis</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">blog</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/JAVA-WEB//" class="article-tag-list-link color4">JAVA WEB</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/JAVA-WEB/SpringBoot//" class="article-tag-list-link color1">SpringBoot</a>
+        			<a href="/categories/blog//" class="article-tag-list-link color5">blog</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/08/29/web-xml之头声明/" class="archive-article-date">
-  	<time datetime="2018-08-29T02:23:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-29</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2018/10/16/String的intern操作/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">String的intern理解</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/29/web-xml之头声明/">web.xml之头声明</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Servlet</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">web.xml</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/JAVA-WEB//" class="article-tag-list-link color4">JAVA WEB</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#序"><span class="toc-number">1.</span> <span class="toc-text">序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、前提"><span class="toc-number">1.1.</span> <span class="toc-text">1、前提</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、思路"><span class="toc-number">1.2.</span> <span class="toc-text">2、思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、操作"><span class="toc-number">1.3.</span> <span class="toc-text">3、操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、建议"><span class="toc-number">1.4.</span> <span class="toc-text">4、建议</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#完"><span class="toc-number">2.</span> <span class="toc-text">完</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/03/25/Spring-事务管理/" class="archive-article-date">
-  	<time datetime="2018-03-25T14:59:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-25</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/25/Spring-事务管理/">Spring 事物管理</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/JAVA-WEB//" class="article-tag-list-link color4">JAVA WEB</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/JAVA-WEB/Spring//" class="article-tag-list-link color2">Spring</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+    </div>
+</aside>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+
   
   
-    </div></section>
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -342,10 +346,10 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
-		isCategory: true,
+		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
 		root: "/",
