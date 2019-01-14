@@ -17,7 +17,7 @@
 <meta property="og:description" content="序最近在看周志明的《深入理解JAVA虚拟机》，然后看到一些关于常量池的问题，记录一下自己的所得所感。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.loli.net/2018/10/16/5bc536e2993d8.jpg">
-<meta property="og:updated_time" content="2018-11-17T17:32:39.826Z">
+<meta property="og:updated_time" content="2019-01-14T15:29:35.780Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="String的intern理解">
 <meta name="twitter:description" content="序最近在看周志明的《深入理解JAVA虚拟机》，然后看到一些关于常量池的问题，记录一下自己的所得所感。">
@@ -166,9 +166,9 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p><img src="https://i.loli.net/2018/10/16/5bc536e2993d8.jpg" alt="网络配图"></p>
-<h1 id="序"><a href="#序" class="headerlink" title="序"></a>序</h1><p>最近在看周志明的《深入理解JAVA虚拟机》，然后看到一些关于常量池的问题，记录一下自己的所得所感。</p>
+<h2 id="序"><a href="#序" class="headerlink" title="序"></a>序</h2><p>最近在看周志明的《深入理解JAVA虚拟机》，然后看到一些关于常量池的问题，记录一下自己的所得所感。</p>
 <a id="more"></a>
-<h2 id="1、静态常量池"><a href="#1、静态常量池" class="headerlink" title="1、静态常量池"></a>1、静态常量池</h2><p>通常是指 <strong>类常量池</strong>，即<code>*.class</code>文件中的常量池，编译的时候被存入了类，方法的信息和字符串等，占用<code>Class</code>文件空间最大的数据项目之一。主要有两大类常量：<strong>字面量</strong>和<strong>符号引用</strong></p>
+<h3 id="1、静态常量池"><a href="#1、静态常量池" class="headerlink" title="1、静态常量池"></a>1、静态常量池</h3><p>通常是指 <strong>类常量池</strong>，即<code>*.class</code>文件中的常量池，编译的时候被存入了类，方法的信息和字符串等，占用<code>Class</code>文件空间最大的数据项目之一。主要有两大类常量：<strong>字面量</strong>和<strong>符号引用</strong></p>
 <ul>
 <li>字面量：如文本字符串、声明为<code>final</code>的常量值等</li>
 <li>符号引用：<ul>
@@ -178,8 +178,8 @@
 </ul>
 </li>
 </ul>
-<h2 id="2、动态常量池"><a href="#2、动态常量池" class="headerlink" title="2、动态常量池"></a>2、动态常量池</h2><p>通常是指 <strong>运行时常量池</strong> ，当<code>class文件</code>被加载进内存后，由<strong>类常量池</strong>转化而来。</p>
-<h2 id="3、关于String的intern方法"><a href="#3、关于String的intern方法" class="headerlink" title="3、关于String的intern方法"></a>3、关于String的intern方法</h2><p>jdk1.7之前和之后是有区别的。</p>
+<h3 id="2、动态常量池"><a href="#2、动态常量池" class="headerlink" title="2、动态常量池"></a>2、动态常量池</h3><p>通常是指 <strong>运行时常量池</strong> ，当<code>class文件</code>被加载进内存后，由<strong>类常量池</strong>转化而来。</p>
+<h3 id="3、关于String的intern方法"><a href="#3、关于String的intern方法" class="headerlink" title="3、关于String的intern方法"></a>3、关于String的intern方法</h3><p>jdk1.7之前和之后是有区别的。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">String a = <span class="string">"A"</span>;</span><br><span class="line">String aa = <span class="keyword">new</span> String(<span class="string">"A"</span>);</span><br><span class="line">String temp = aa.intern();</span><br><span class="line"></span><br><span class="line">System.out.println(a == temp);</span><br><span class="line">System.out.println(aa == temp);</span><br></pre></td></tr></table></figure>
 <p>这里输出是多少呢？我们分别在jdk1.7之前和jdk1.7之后进行讨论</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在 jdk1.7 之前</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 首先查找字符串常量池是否存在"A"字符，因为是第一次创建，所以字符串常量池中是不存在字符“A”的，所以</span></span><br><span class="line"><span class="comment"> * 这个时候会在字符串常量池创建一个“A”字符，并把这个字符的地址赋给引用a。</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">String a = <span class="string">"A"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 在执行这个语句的时候，同样会先去字符串常量池查找是否存在，如果存在那么直接将该字符串对象“A”（位于</span></span><br><span class="line"><span class="comment"> * 量池中）去初始化堆中的对象，然后将堆中的对象（由new String生成）的地址赋给引用aa（位于栈中）</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">String aa = <span class="keyword">new</span> String(<span class="string">"A"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 因为aa的对象在堆中的内容为字符串“A”，在字符串常量池中也存在相同的对象内容，所以直接返回常量池中字</span></span><br><span class="line"><span class="comment"> * 符串“A”的地址值</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">String temp = aa.intern();</span><br><span class="line"></span><br><span class="line">System.out.println(a == temp); <span class="comment">// true</span></span><br><span class="line">System.out.println(aa == temp); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
@@ -193,7 +193,7 @@
 <p>s1是栈内变量，它的内存保存的是堆中的new String对象的地址，new String在堆中生成对象，并用常量池的字符串对象”abc”初始化堆中的对象，<strong>所以堆中的对象的内存的内容和常量池对象的内存的内容一样，但是是不同的两个对象</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String s1 = <span class="string">"abc"</span>;</span><br></pre></td></tr></table></figure>
 <p>s1是一个栈内变量，运行这一行代码后会先在常量池中查找是否存在值为<code>abc</code>的字符串对象，如果存在那么直接返回字符串对象的地址值；如果在常量池中不存在值为<code>abc</code>的字符串对象，那么就会在常量池中新建一个值为<code>abc</code>的字符串对象，然后返回其地址值给引用s1。</p>
-<h1 id="完"><a href="#完" class="headerlink" title="完"></a>完</h1><blockquote>
+<h2 id="完"><a href="#完" class="headerlink" title="完"></a>完</h2><blockquote>
 <p>  努力成为一个『不那么差』的程序员 </p>
 </blockquote>
 <p>参考资料：</p>
@@ -254,11 +254,11 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/11/10/Hexo 博客备份（上）/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/11/22/LNotes/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          Hexo 博客备份（上）
+          LNotes
         
       </div>
     </a>
@@ -292,7 +292,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#序"><span class="toc-number">1.</span> <span class="toc-text">序</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、静态常量池"><span class="toc-number">1.1.</span> <span class="toc-text">1、静态常量池</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、动态常量池"><span class="toc-number">1.2.</span> <span class="toc-text">2、动态常量池</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、关于String的intern方法"><span class="toc-number">1.3.</span> <span class="toc-text">3、关于String的intern方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4、关于String新建对象的一些理解"><span class="toc-number">1.3.1.</span> <span class="toc-text">4、关于String新建对象的一些理解</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#完"><span class="toc-number">2.</span> <span class="toc-text">完</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#序"><span class="toc-number">1.</span> <span class="toc-text">序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、静态常量池"><span class="toc-number">1.1.</span> <span class="toc-text">1、静态常量池</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、动态常量池"><span class="toc-number">1.2.</span> <span class="toc-text">2、动态常量池</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、关于String的intern方法"><span class="toc-number">1.3.</span> <span class="toc-text">3、关于String的intern方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、关于String新建对象的一些理解"><span class="toc-number">1.4.</span> <span class="toc-text">4、关于String新建对象的一些理解</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#完"><span class="toc-number">2.</span> <span class="toc-text">完</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -405,14 +405,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">乱七八糟</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">blog</a>
               </li>
              
               <li class="article-tag-list-item">
