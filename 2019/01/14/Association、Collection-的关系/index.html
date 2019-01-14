@@ -6,18 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https:www.luoxy.top">
-  <title>Tag: JAVA | Lxy&#39;s Blog</title>
+  <title>Association 、Collection区别 | Lxy&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="努力成为一个『不那么差』的程序员">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Lxy&#39;s Blog">
-<meta property="og:url" content="https:www.luoxy.top/tags/JAVA/index.html">
+  <meta name="description" content="序最近在做课设时，持久层采用MyBatis，遇到了一些关于 association 和 collection 的问题，现在把它记录一下。">
+<meta name="keywords" content="MyBatis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Association 、Collection区别">
+<meta property="og:url" content="https:www.luoxy.top/2019/01/14/Association、Collection-的关系/index.html">
 <meta property="og:site_name" content="Lxy&#39;s Blog">
-<meta property="og:description" content="努力成为一个『不那么差』的程序员">
+<meta property="og:description" content="序最近在做课设时，持久层采用MyBatis，遇到了一些关于 association 和 collection 的问题，现在把它记录一下。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-01-14T12:45:39.930Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Lxy&#39;s Blog">
-<meta name="twitter:description" content="努力成为一个『不那么差』的程序员">
+<meta name="twitter:title" content="Association 、Collection区别">
+<meta name="twitter:description" content="序最近在做课设时，持久层采用MyBatis，遇到了一些关于 association 和 collection 的问题，现在把它记录一下。">
   
     <link rel="alternative" href="/atom.xml" title="Lxy&#39;s Blog" type="application/atom+xml">
   
@@ -141,185 +143,152 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Association、Collection-的关系" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Association 、Collection区别
+    </h1>
+  
+
+        
+        <a href="/2019/01/14/Association、Collection-的关系/" class="archive-article-date">
+  	<time datetime="2019-01-14T12:25:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-14</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="序"><a href="#序" class="headerlink" title="序"></a>序</h1><p>最近在做课设时，持久层采用MyBatis，遇到了一些关于 association 和 collection 的问题，现在把它记录一下。</p>
+<a id="more"></a>
+<p>通常我们都会进行多表查询，这个查询的结果往往涉及到多个类或者集合等。</p>
+<p>假设现在有这样一个关系，一个学生属于一个专业，一个专业有多个课程。在Mysql中有4个表的存在</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 学生表 --</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> u_student(</span><br><span class="line">   student_id <span class="built_in">varchar</span>(<span class="number">11</span>) <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line">   student_name <span class="built_in">varchar</span>(<span class="number">10</span>) <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line">   student_profession_id <span class="built_in">varchar</span>(<span class="number">5</span>),</span><br><span class="line">   primary <span class="keyword">key</span>(student_id),</span><br><span class="line">   foreign <span class="keyword">key</span> (student_profession_id) <span class="keyword">references</span> u_profession(profession_id)</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 专业表 --</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> u_profession(</span><br><span class="line">  profession_id <span class="built_in">varchar</span>(<span class="number">5</span>) <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line">  profession_name <span class="built_in">varchar</span>(<span class="number">10</span>) <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line">  primary <span class="keyword">key</span>(profession_id)</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 课程表 --</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> u_course(</span><br><span class="line">  course_id <span class="built_in">varchar</span>(<span class="number">5</span>) <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line">  course_name <span class="built_in">varchar</span>(<span class="number">10</span>) <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line">  primary <span class="keyword">key</span>(course_id)</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 上课任务 --</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> u_profession_course(</span><br><span class="line">  profession_id <span class="built_in">varchar</span>(<span class="number">5</span>),</span><br><span class="line">  course_id <span class="built_in">varchar</span>(<span class="number">5</span>),</span><br><span class="line">  foreign <span class="keyword">key</span> (profession_id) <span class="keyword">references</span> u_profession(profession_id),</span><br><span class="line">  foreign <span class="keyword">key</span> (course_id) <span class="keyword">references</span> u_course(course_id)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>这里表的设计为了消除冗余，例如一个专业有多个课程，如果直接把课程放在专业表里面充当属性的话，会有很多重复列。所以创建上课任务表消除冗余。</p>
+<p>对应的类为</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 学生</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String studentId;</span><br><span class="line">    <span class="keyword">private</span> String studentName;</span><br><span class="line">    <span class="keyword">private</span> Profession profession;</span><br><span class="line">    <span class="comment">// 省略对应的 getter/setter 方法</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 专业</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Profession</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String professionId;</span><br><span class="line">    <span class="keyword">private</span> String progessionName;</span><br><span class="line">    <span class="keyword">private</span> List&lt;Course&gt; courseList;</span><br><span class="line">    <span class="comment">// 省略对应的 getter/setter 方法</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 课程</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Course</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String courseId;</span><br><span class="line">    <span class="keyword">private</span> String courseName;</span><br><span class="line">    <span class="comment">// 省略对应的 getter/setter 方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">StudentDao</span></span>&#123;</span><br><span class="line">  <span class="comment">// 查询特定学号的学生信息</span></span><br><span class="line">    <span class="function">Student <span class="title">selectStudentById</span><span class="params">(String stuId)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>对应的 studentmapper.xml 是（如果我们要查询某个学生的信息（包括专业名称），假设sql语句是写在 * mapper.xml中的）</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 省略 namespace 等 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span> =<span class="string">"selectStudentById"</span> <span class="attr">javaType</span> = <span class="string">"int"</span> <span class="attr">resultMap</span> = <span class="string">"getStudent"</span>&gt;</span></span><br><span class="line">    select a.*,b.profession_name from u_student a, u_profession b where a.profession_id = b.profession_id and a.student_id = #&#123;stuId&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span> = <span class="string">"getStudent"</span> <span class="attr">type</span> = <span class="string">"Student"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">id</span> <span class="attr">property</span> = <span class="string">"studentId"</span> <span class="attr">column</span>=<span class="string">"student_id"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span> = <span class="string">"studentName"</span> <span class="attr">column</span>=<span class="string">"student_name"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">association</span> <span class="attr">property</span> = <span class="string">"profession"</span> <span class="attr">javaType</span> = <span class="string">"Profession"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span> <span class="attr">property</span> = <span class="string">"professionId"</span> <span class="attr">column</span> = <span class="string">"profession_id"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span> = <span class="string">"professionName"</span> <span class="attr">column</span> = <span class="string">"profession_name"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">association</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>一个学生对应一个专业，一个专业含有多个学生。当我们通过学号查询学生信息时，使用 association 去达到 一对多 关系的目的。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ProfessionDao</span></span>&#123;</span><br><span class="line">    <span class="comment">// 查询某专业信息（如果有课程要把课程也输出）</span></span><br><span class="line">    <span class="function">List&lt;Profession&gt;  <span class="title">getProfessionList</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>对应的 ProfessionMapper.xml 是</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 省略 namespace 等 --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- a.*  profession_id 、profession_name --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- c.* course_id 、course_name --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span> = <span class="string">"getProfessionList"</span> <span class="attr">resultMap</span> = <span class="string">"professionList"</span> &gt;</span></span><br><span class="line">    select a.*,c.* from</span><br><span class="line">    u_profession a </span><br><span class="line">    left join </span><br><span class="line">    u_profession_course b </span><br><span class="line">    on a.profession_id = b.profession_id </span><br><span class="line">    left join </span><br><span class="line">    u_course c </span><br><span class="line">    on c.course_id = b.course_id</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span> = <span class="string">"professionList"</span> <span class="attr">type</span> = <span class="string">"Profession"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">id</span> <span class="attr">property</span> = <span class="string">"professionId"</span> <span class="attr">column</span> = <span class="string">"profession_id"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">reuslt</span> <span class="attr">property</span> = <span class="string">"professName"</span> <span class="attr">column</span> = <span class="string">"profession_name"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">collection</span> <span class="attr">property</span> = <span class="string">"courseList"</span> <span class="attr">ofType</span> = <span class="string">"Course"</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">id</span> <span class="attr">property</span> = <span class="string">"courseId"</span> <span class="attr">column</span> = <span class="string">"course_id"</span> /&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span> = <span class="string">"courseName"</span> <span class="attr">column</span> = <span class="string">"course_name"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">collection</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>可以看到在 Profession 中的 List<course> 是使用 collection 封装的。</course></p>
+<p>如果在 Profession 中，改成如下:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Profession</span></span>&#123;</span><br><span class="line">   <span class="comment">// 其他不变`</span></span><br><span class="line">    ……</span><br><span class="line">    <span class="keyword">private</span> List&lt;Course&gt; courseList = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    ……</span><br><span class="line">   <span class="comment">// 省略 getter/setter 方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span> = <span class="string">"professionList"</span> <span class="attr">type</span> = <span class="string">"Profession"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">id</span> <span class="attr">property</span> = <span class="string">"professionId"</span> <span class="attr">column</span> = <span class="string">"profession_id"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">reuslt</span> <span class="attr">property</span> = <span class="string">"professName"</span> <span class="attr">column</span> = <span class="string">"profession_name"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">association</span> <span class="attr">id</span> = <span class="string">"courseList"</span> <span class="attr">javaType</span> = <span class="string">"Course"</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">id</span> <span class="attr">property</span> = <span class="string">"courseId"</span> <span class="attr">column</span> = <span class="string">"course_id"</span> /&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span> = <span class="string">"courseName"</span> <span class="attr">column</span> = <span class="string">"course_name"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">association</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这里在 Profession 类中初始化 List<course> ，然后就可以使用 association 关联去做 映射，（即把数据库的值赋值给属性）；</course></p>
+<p>而如果没有初始化 List<course> 的话，就会报错，出现 Dismatch 的错误，即类型不匹配。</course></p>
+<p>从MyBatis的文档可以看出，association 是一个复杂类型的关联；collection 是一个复杂类型的集合·</p>
+<p>但是当你 JavaBean 中集合类型已经初始化的话，发现其实也是可以使用 association 去做关联映射,这是为什么呢？如果不初始化，就没办法用 association 作关联映射。</p>
+<p>我的初步猜测是 MyBatis 的 Association 和 Collection 工作的原理是根据我们定义的 javaType（ofType）实例化一个对象出来，再根据这个对象去作映射。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> Profession profession;</span><br><span class="line"></span><br><span class="line">&lt;association property = <span class="string">"profession"</span> javaType = <span class="string">"Profession"</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>像这里 MyBatis 应该会实例化一个 Profession 的对象，然后再映射到对应的属性。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> List&lt;Course&gt; courseList;</span><br><span class="line"></span><br><span class="line"> &lt;collection property = <span class="string">"courseList"</span> ofType = <span class="string">"Course"</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>这里 MyBatis 会先自动实例化一个集合对象，（具体集合类型不清晰），然后再实例化 Course 对象，就是说这里 MyBatis 会创建两个对象。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> List&lt;Course&gt; courseList;</span><br><span class="line"></span><br><span class="line">&lt;association property = <span class="string">"courseList"</span> javaType = <span class="string">"Course"</span>&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这里不会创建集合对象，只是创建Course对象，但是集合对象为空的话就会报错。所以会报 DisMatch 的错误</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> List&lt;Course&gt; courseList = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">&lt;association property = <span class="string">"courseList"</span> javaType = <span class="string">"Course"</span>&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这里就能够运行成功，因为集合对象已经创建了，MyBatis 创建 Course 对象并且映射到对应的属性</span></span><br></pre></td></tr></table></figure>
+<p>以上都是自己的猜测，等以后再进一步跟进源码去验证正确性。</p>
+<h1 id="完"><a href="#完" class="headerlink" title="完"></a>完</h1><blockquote>
+<p>努力成为一个『不那么差』的程序员 </p>
+</blockquote>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/10/16/String的intern操作/" class="archive-article-date">
-  	<time datetime="2018-10-16T00:49:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-16</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/10/16/String的intern操作/">String的intern理解</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">JAVA</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">String</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">MyBatis</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/JAVA//" class="article-tag-list-link color5">JAVA</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/JAVA/SE//" class="article-tag-list-link color3">SE</a>
+        			<a href="/categories/MyBatis//" class="article-tag-list-link color3">MyBatis</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/09/06/java中整型的范围/" class="archive-article-date">
-  	<time datetime="2018-09-06T08:37:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-06</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2018/12/10/CVTE/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">记 CVTE 面试（凉凉）</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/09/06/java中整型的范围/">JAVA中整型的范围</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">JAVA</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/JAVA//" class="article-tag-list-link color5">JAVA</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/JAVA/SE//" class="article-tag-list-link color3">SE</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#序"><span class="toc-number">1.</span> <span class="toc-text">序</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#完"><span class="toc-number">2.</span> <span class="toc-text">完</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/02/16/JAVA多态问题/" class="archive-article-date">
-  	<time datetime="2018-02-16T08:52:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-16</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/02/16/JAVA多态问题/">JAVA多态</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">JAVA</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/JAVA//" class="article-tag-list-link color5">JAVA</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/JAVA/SE//" class="article-tag-list-link color3">SE</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+    </div>
+</aside>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+
   
   
-    </div></section>
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -342,9 +311,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
