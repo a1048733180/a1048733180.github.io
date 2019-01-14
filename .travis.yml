@@ -1,0 +1,47 @@
+language: node_js
+
+node_js: stable
+
+cache:
+    apt: true
+    directories:
+        - node_modules
+
+notifications:
+    email:
+        recipients:
+            - a1048733180@163.com
+        on_success: change
+        on_failure: always
+
+# turn off the clone of submodules for change the SSH to HTTPS in .gitmodules to avoid the error
+git:
+  submodules: false
+        
+before_install:
+    # Use sed to replace the SSH URL with the public URL if .gitmodules exists
+    - test -e ".gitmodules" && sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
+    # update the submodule in repo by manual
+    - git submodule update --init --recursive
+    - export TZ='Asia/Shanghai'
+    - npm install hexo-cli -g
+    - chmod +x ./publish-to-gh-pages.sh
+
+install:
+    - npm install
+
+script:
+    - hexo clean
+    - hexo g
+
+after_script:
+    - ./publish-to-gh-pages.sh
+
+branches:
+    only:
+        - hexo
+
+env:
+    global:
+        # Github Pages
+        - GH_REF: github.com/isLuoxy/isLuoxy.github.io.git
