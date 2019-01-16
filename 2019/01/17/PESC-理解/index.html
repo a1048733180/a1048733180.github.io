@@ -8,20 +8,21 @@
   <link rel="dns-prefetch" href="https:www.luoxy.top">
   <title>PESC 原则理解 | Lxy&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="序PECS 原则，是在泛型中定义的一种原则。相对应的是泛型中的通配符概念，即 &amp;lt; ? extends T &amp;gt; 和 &amp;lt; ? super T &amp;gt; 经常被这个概念搞晕，为了加深印象，决定把自己那一瞬间的感悟记起来。">
+  <meta name="description" content="序 PECS 原则，是在泛型中定义的一种原则。相对应的是泛型中的通配符概念，即 &amp;lt; ? extends T &amp;gt; 和 &amp;lt; ? super T &amp;gt; 经常被这个概念搞晕，为了加深印象，决定把自己那一瞬间的感悟记起来。">
 <meta name="keywords" content="JAVA,PESC">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PESC 原则理解">
 <meta property="og:url" content="https:www.luoxy.top/2019/01/17/PESC-理解/index.html">
 <meta property="og:site_name" content="Lxy&#39;s Blog">
-<meta property="og:description" content="序PECS 原则，是在泛型中定义的一种原则。相对应的是泛型中的通配符概念，即 &amp;lt; ? extends T &amp;gt; 和 &amp;lt; ? super T &amp;gt; 经常被这个概念搞晕，为了加深印象，决定把自己那一瞬间的感悟记起来。">
+<meta property="og:description" content="序 PECS 原则，是在泛型中定义的一种原则。相对应的是泛型中的通配符概念，即 &amp;lt; ? extends T &amp;gt; 和 &amp;lt; ? super T &amp;gt; 经常被这个概念搞晕，为了加深印象，决定把自己那一瞬间的感悟记起来。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://ppe.oss-cn-shenzhen.aliyuncs.com/collections/130/3/thumb.jpg">
 <meta property="og:image" content="https://i.loli.net/2019/01/17/5c3f6d77df394.png">
-<meta property="og:updated_time" content="2019-01-16T17:55:49.639Z">
+<meta property="og:updated_time" content="2019-01-16T18:01:53.161Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PESC 原则理解">
-<meta name="twitter:description" content="序PECS 原则，是在泛型中定义的一种原则。相对应的是泛型中的通配符概念，即 &amp;lt; ? extends T &amp;gt; 和 &amp;lt; ? super T &amp;gt; 经常被这个概念搞晕，为了加深印象，决定把自己那一瞬间的感悟记起来。">
-<meta name="twitter:image" content="https://i.loli.net/2019/01/17/5c3f6d77df394.png">
+<meta name="twitter:description" content="序 PECS 原则，是在泛型中定义的一种原则。相对应的是泛型中的通配符概念，即 &amp;lt; ? extends T &amp;gt; 和 &amp;lt; ? super T &amp;gt; 经常被这个概念搞晕，为了加深印象，决定把自己那一瞬间的感悟记起来。">
+<meta name="twitter:image" content="http://ppe.oss-cn-shenzhen.aliyuncs.com/collections/130/3/thumb.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Lxy&#39;s Blog" type="application/atom+xml">
   
@@ -165,7 +166,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="序"><a href="#序" class="headerlink" title="序"></a>序</h1><p>PECS 原则，是在泛型中定义的一种原则。相对应的是泛型中的通配符概念，即 <strong>&lt; ? extends T &gt;</strong> 和 <strong>&lt; ? super T &gt;</strong></p>
+        <h1 id="序"><a href="#序" class="headerlink" title="序"></a>序</h1><p><img src="http://ppe.oss-cn-shenzhen.aliyuncs.com/collections/130/3/thumb.jpg" alt=""></p>
+<p>PECS 原则，是在泛型中定义的一种原则。相对应的是泛型中的通配符概念，即 <strong>&lt; ? extends T &gt;</strong> 和 <strong>&lt; ? super T &gt;</strong></p>
 <p>经常被这个概念搞晕，为了加深印象，决定把自己那一瞬间的感悟记起来。</p>
 <a id="more"></a>
 <h2 id="1、何为-PECS原则"><a href="#1、何为-PECS原则" class="headerlink" title="1、何为 PECS原则"></a>1、何为 PECS原则</h2><p>PECS （Producer Extends Customer Super） ，字面上的意思就是 生产者、消费者，而 Extends 和 Super 在 Java 中分别对应的是继承和调用父类的函数。</p>
