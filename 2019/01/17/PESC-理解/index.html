@@ -6,18 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https:www.luoxy.top">
-  <title>Tag: LNotes | Lxy&#39;s Blog</title>
+  <title>PESC 原则理解 | Lxy&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="努力成为一个『不那么差』的程序员">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Lxy&#39;s Blog">
-<meta property="og:url" content="https:www.luoxy.top/tags/LNotes/index.html">
+  <meta name="description" content="序PECS 原则，是在泛型中定义的一种原则。相对应的是泛型中的通配符概念，即 &amp;lt; ? extends T &amp;gt; 和 &amp;lt; ? super T &amp;gt; 经常被这个概念搞晕，为了加深印象，决定把自己那一瞬间的感悟记起来。">
+<meta name="keywords" content="JAVA,PESC">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PESC 原则理解">
+<meta property="og:url" content="https:www.luoxy.top/2019/01/17/PESC-理解/index.html">
 <meta property="og:site_name" content="Lxy&#39;s Blog">
-<meta property="og:description" content="努力成为一个『不那么差』的程序员">
+<meta property="og:description" content="序PECS 原则，是在泛型中定义的一种原则。相对应的是泛型中的通配符概念，即 &amp;lt; ? extends T &amp;gt; 和 &amp;lt; ? super T &amp;gt; 经常被这个概念搞晕，为了加深印象，决定把自己那一瞬间的感悟记起来。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.loli.net/2019/01/17/5c3f6d77df394.png">
+<meta property="og:updated_time" content="2019-01-16T17:55:49.639Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Lxy&#39;s Blog">
-<meta name="twitter:description" content="努力成为一个『不那么差』的程序员">
+<meta name="twitter:title" content="PESC 原则理解">
+<meta name="twitter:description" content="序PECS 原则，是在泛型中定义的一种原则。相对应的是泛型中的通配符概念，即 &amp;lt; ? extends T &amp;gt; 和 &amp;lt; ? super T &amp;gt; 经常被这个概念搞晕，为了加深印象，决定把自己那一瞬间的感悟记起来。">
+<meta name="twitter:image" content="https://i.loli.net/2019/01/17/5c3f6d77df394.png">
   
     <link rel="alternative" href="/atom.xml" title="Lxy&#39;s Blog" type="application/atom+xml">
   
@@ -141,71 +145,177 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-PESC-理解" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/11/22/LNotes/" class="archive-article-date">
-  	<time datetime="2018-11-21T16:50:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-22</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/11/22/LNotes/">LNotes</a>
+    <h1 class="article-title" itemprop="name">
+      PESC 原则理解
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2019/01/17/PESC-理解/" class="archive-article-date">
+  	<time datetime="2019-01-16T17:46:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="序"><a href="#序" class="headerlink" title="序"></a>序</h1><p>PECS 原则，是在泛型中定义的一种原则。相对应的是泛型中的通配符概念，即 <strong>&lt; ? extends T &gt;</strong> 和 <strong>&lt; ? super T &gt;</strong></p>
+<p>经常被这个概念搞晕，为了加深印象，决定把自己那一瞬间的感悟记起来。</p>
+<a id="more"></a>
+<h2 id="1、何为-PECS原则"><a href="#1、何为-PECS原则" class="headerlink" title="1、何为 PECS原则"></a>1、何为 PECS原则</h2><p>PECS （Producer Extends Customer Super） ，字面上的意思就是 生产者、消费者，而 Extends 和 Super 在 Java 中分别对应的是继承和调用父类的函数。</p>
+<p> <strong>PECS</strong> 原则就是：</p>
+<ol>
+<li><strong>频繁往外读取内容的，适合用上界 extends。</strong></li>
+<li><strong>经常往里插入的，适合用下界 super。</strong></li>
+</ol>
+<h2 id="2、-lt-extends-T-gt"><a href="#2、-lt-extends-T-gt" class="headerlink" title="2、 &lt; ? extends T &gt;"></a>2、 &lt; ? extends T &gt;</h2><p>&lt; ? extends T &gt;  “上界通配符 ”，即类型是 T 或者 T 的子类。&lt; ？extends Number&gt; ，类型可能是 Long ，或者可能是 Integer 。具体是什么类型就不清楚了。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">List&lt;? extends Number&gt; e = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">e.add(<span class="number">1</span>); <span class="comment">// 编译器会提示你 xxx cannot be applied xxx 如下图</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://i.loli.net/2019/01/17/5c3f6d77df394.png" alt="1547658004202"></p>
+<p>因为我们只知道类型是 Number及其子类，但具体哪一个不清楚。<strong>所以不能执行添加方法</strong>。</p>
+<p>对于读取方法，结果只能存放在 T 或者基类中，如 Object</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Number number = e.get(<span class="number">0</span>);</span><br><span class="line">Object obj = e.get(<span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="3、-lt-super-T-gt"><a href="#3、-lt-super-T-gt" class="headerlink" title="3、&lt; ? super T &gt;"></a>3、&lt; ? super T &gt;</h2><p>&lt; ? super T&gt; “下界通配符”，即类型是 T 或者是 T 的父类。 而 Object 是所有类的父类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">List&lt;? <span class="keyword">super</span> Number&gt; s = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">s.add(<span class="number">1</span>);</span><br><span class="line">Object o = s.get(<span class="number">0</span>); <span class="comment">// 这里是用 Object 去接收拿到的东西</span></span><br></pre></td></tr></table></figure>
+<p>因为 Object 是所有类的父类，具有很大的兼容性。或者已知结果类型，用来替代 Object，不过这样就失去了灵活性，因为可能不止一种类型存在。所以用 Object 去接收。不过这样子的话就会丢失原本类型的信息，（本来是 Integer , 用  Object 接收，那 Number 的全部特性都会丢失 。）</p>
+<h2 id="4、总结"><a href="#4、总结" class="headerlink" title="4、总结"></a>4、总结</h2><table>
+<thead>
+<tr>
+<th></th>
+<th style="text-align:center">读取</th>
+<th style="text-align:center">写入</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;? extends T&gt;</td>
+<td style="text-align:center">√</td>
+<td style="text-align:center">×</td>
+</tr>
+<tr>
+<td>&lt;? super T &gt;</td>
+<td style="text-align:center">×</td>
+<td style="text-align:center">√</td>
+</tr>
+</tbody>
+</table>
+<p>&lt;? extends T&gt; 不能插入，但能读取到，并且用 T 或者 T 的基类接收。</p>
+<p>&lt;? super T&gt;能插入，但读取的时候只能用 Object 接收，丢失 T 的全部信息。</p>
+<p>所以 <strong>PECS</strong> 原则就是：</p>
+<ol>
+<li><strong>频繁往外读取内容的，适合用上界 extends。</strong></li>
+<li><strong>经常往里插入的，适合用下界 super。</strong></li>
+</ol>
+<p>附上一段 jdk 源码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Collections 源码的 copy(),可以看到 dest 拿来写入，src 拿来读取</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function"><span class="keyword">void</span> <span class="title">copy</span><span class="params">(List&lt;? <span class="keyword">super</span> T&gt; dest, List&lt;? extends T&gt; src)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> srcSize = src.size();</span><br><span class="line">        <span class="keyword">if</span> (srcSize &gt; dest.size())</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IndexOutOfBoundsException(<span class="string">"Source does not fit in dest"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (srcSize &lt; COPY_THRESHOLD ||</span><br><span class="line">            (src <span class="keyword">instanceof</span> RandomAccess &amp;&amp; dest <span class="keyword">instanceof</span> RandomAccess)) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;srcSize; i++)</span><br><span class="line">                dest.set(i, src.get(i));</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            ListIterator&lt;? <span class="keyword">super</span> T&gt; di=dest.listIterator();</span><br><span class="line">            ListIterator&lt;? extends T&gt; si=src.listIterator();</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;srcSize; i++) &#123;</span><br><span class="line">                di.next();</span><br><span class="line">                di.set(si.next());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h1 id="完"><a href="#完" class="headerlink" title="完"></a>完</h1><blockquote>
+<p>努力成为一个『不那么差』的程序员 </p>
+</blockquote>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">LNotes</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">JAVA</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">PESC</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/notes//" class="article-tag-list-link color1">notes</a>
+        			<a href="/categories/JAVA//" class="article-tag-list-link color5">JAVA</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/JAVA/泛型//" class="article-tag-list-link color3">泛型</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2019/01/14/Association、Collection-的关系/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Association 、Collection区别</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#序"><span class="toc-number">1.</span> <span class="toc-text">序</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、何为-PECS原则"><span class="toc-number">1.1.</span> <span class="toc-text">1、何为 PECS原则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、-lt-extends-T-gt"><span class="toc-number">1.2.</span> <span class="toc-text">2、 &lt; ? extends T &gt;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、-lt-super-T-gt"><span class="toc-number">1.3.</span> <span class="toc-text">3、&lt; ? super T &gt;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4、总结"><span class="toc-number">1.4.</span> <span class="toc-text">4、总结</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#完"><span class="toc-number">2.</span> <span class="toc-text">完</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -228,9 +338,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
