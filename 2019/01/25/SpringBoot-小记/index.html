@@ -6,18 +6,30 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https:www.luoxy.top">
-  <title>Lxy&#39;s Blog</title>
+  <title>SpringBoot 小记 | Lxy&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="努力成为一个『不那么差』的程序员">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Lxy&#39;s Blog">
-<meta property="og:url" content="https:www.luoxy.top/index.html">
+  <meta name="description" content="序最近捡起一点 SpringBoot 的知识 ，做一些小记。">
+<meta name="keywords" content="SpringBoot">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringBoot 小记">
+<meta property="og:url" content="https:www.luoxy.top/2019/01/25/SpringBoot-小记/index.html">
 <meta property="og:site_name" content="Lxy&#39;s Blog">
-<meta property="og:description" content="努力成为一个『不那么差』的程序员">
+<meta property="og:description" content="序最近捡起一点 SpringBoot 的知识 ，做一些小记。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://ppe.oss-cn-shenzhen.aliyuncs.com/collections/2/4/full_res.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/01/24/5c49d5b601bee.png">
+<meta property="og:image" content="https://i.loli.net/2019/01/24/5c49d67b34e15.png">
+<meta property="og:image" content="https://i.loli.net/2019/01/24/5c49d7a85e594.png">
+<meta property="og:image" content="https://i.loli.net/2019/01/24/5c49d841a8347.png">
+<meta property="og:image" content="https://i.loli.net/2019/01/24/5c49dd0d19f42.png">
+<meta property="og:image" content="https://i.loli.net/2019/01/24/5c49dd9e414a6.png">
+<meta property="og:image" content="https://i.loli.net/2019/01/24/5c49da71a2408.png">
+<meta property="og:image" content="https://i.loli.net/2019/01/24/5c49de4a1fcb0.png">
+<meta property="og:updated_time" content="2019-01-24T17:00:24.971Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Lxy&#39;s Blog">
-<meta name="twitter:description" content="努力成为一个『不那么差』的程序员">
+<meta name="twitter:title" content="SpringBoot 小记">
+<meta name="twitter:description" content="序最近捡起一点 SpringBoot 的知识 ，做一些小记。">
+<meta name="twitter:image" content="http://ppe.oss-cn-shenzhen.aliyuncs.com/collections/2/4/full_res.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Lxy&#39;s Blog" type="application/atom+xml">
   
@@ -141,16 +153,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-SpringBoot-小记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-SpringBoot-小记" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/25/SpringBoot-小记/">SpringBoot 小记</a>
+    <h1 class="article-title" itemprop="name">
+      SpringBoot 小记
     </h1>
   
 
@@ -165,9 +175,59 @@
       
         <p><img src="http://ppe.oss-cn-shenzhen.aliyuncs.com/collections/2/4/full_res.jpg" alt="泼辣有图"></p>
 <h1 id="序"><a href="#序" class="headerlink" title="序"></a>序</h1><p>最近捡起一点 SpringBoot 的知识 ，做一些小记。</p>
-        
-          <a class="article-more-a" href="/2019/01/25/SpringBoot-小记/#more">more >></a>
-        
+<a id="more"></a>
+<h2 id="1、关于-SpringBoot-静态页面问题"><a href="#1、关于-SpringBoot-静态页面问题" class="headerlink" title="1、关于 SpringBoot 静态页面问题"></a>1、关于 SpringBoot 静态页面问题</h2><p>一般来说，SpringBoot 是使用模版去进行前后端的交互；而静态的 html 文件只能通过 ajax 进行交互。SpringBoot 支持可以直接通过访问 xxx.html 到服务器的某静态文件，所以一般来说会有拦截器进行拦截判断。下面对几种不同的控制器返回页面方式进行小记</p>
+<ul>
+<li><p>不使用模版（静态 html ）</p>
+<p>==一般来说，SpringBoot 建议全部静态文件放在 static 目录下（src/main/resources/static） ，而 SpringBoot 对该目录的访问路径默认为 /==，</p>
+<p>意思就是如果你要访问该路径下的文件，例如：</p>
+<p><img src="https://i.loli.net/2019/01/24/5c49d5b601bee.png" alt=""></p>
+<p>要访问 chart.html ，其路径是（ src/main/resources/html/chart.html ），但是我们访问时只需要（ /html/chart.html ）即可访问。</p>
+<p><img src="https://i.loli.net/2019/01/24/5c49d67b34e15.png" alt=""></p>
+</li>
+</ul>
+<p>  如果是通过控制器路由的话，在配置文件中 （ application.properties / application.yml ）配置好页面的前缀和后缀。</p>
+<p>  <img src="https://i.loli.net/2019/01/24/5c49d7a85e594.png" alt=""></p>
+<p>  控制器直接返回字符串即可，==这里不能使用 @ResponseBody 注解方法，或者使用 @RestController 注解控制器类==，因为这样会直接将字符串返回回去，不经过页面解析。</p>
+<p>  <img src="https://i.loli.net/2019/01/24/5c49d841a8347.png" alt=""></p>
+<p>  控制器写法就不多说了，重点就是返回的字符串是视图的名字，经过页面解析后会组装成 /chart.html,这样就跟前端直接访问资源文件一样，所以现在一般都是后端给定接口和数据，路由由前端控制。</p>
+<blockquote>
+<p>如果要更改默认的静态资源访问路径，可以在配置文件中更改 spring.resources.static-locations</p>
+<p><img src="https://i.loli.net/2019/01/24/5c49dd0d19f42.png" alt=""></p>
+<p>这样默认的静态资源访问路径就修改了，这样可以通过 localhost:8080/chart.html 访问到该页面</p>
+<p><img src="https://i.loli.net/2019/01/24/5c49dd9e414a6.png" alt=""></p>
+<p>如果使用控制器路由同理只要修改配置文件中的前后缀文件即可。==重点是要知道当前的静态资源访问路径是什么，做出对应修改就行了。==</p>
+</blockquote>
+<ul>
+<li><p>使用模版（Thymeleaf）</p>
+<p>SpringBoot 中 Thymeleaf 模版默认会使用 templates 作为视图文件，</p>
+<p><img src="https://i.loli.net/2019/01/24/5c49da71a2408.png" alt=""></p>
+<p>在配置文件配置后对应视图文件的前后缀，通过控制器返回视图名即可访问</p>
+<p><img src="https://i.loli.net/2019/01/24/5c49de4a1fcb0.png" alt=""></p>
+</li>
+</ul>
+<h2 id="2、jar-包访问-resources-目录下的文件"><a href="#2、jar-包访问-resources-目录下的文件" class="headerlink" title="2、jar 包访问 resources 目录下的文件"></a>2、jar 包访问 resources 目录下的文件</h2><ul>
+<li>为什么要打包成 jar 包</li>
+</ul>
+<p>SpringBoot 内置 tomcat，所以我们可以直接将一个 SpringBoot 项目打包成 jar 包，然后通过命令行启动，而不用过多的去配置 Tomcat 或其他服务器</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar xxx.jar</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>背景</p>
+<p>假设我们现在有一个读取本地文件的需求，（通常我们用数据库代替），这里是假设我们通过读取本地文件。然后在本地开发我们读取该文件很容易，只要提供其相对路径或者绝对路径。但是如果要在另一台服务器启动，那么该本地文件自然也要在项目里面，（也可以放在 jar 包外通过命令行时指定本地文件，这里不探讨这种做法）。</p>
+<p>假设我们把文件放在 resources 下，文件名为 test.log ,那么我们读取该文件时一般来说都是通过 FileInputStream 操作的，这样在开发时是正常的，因为文件是真实存在与某个磁盘上的。</p>
+<p>但是当你打包成 jar 包后，会发现报错，<strong>java.io.FileNotFoundException</strong> ,并且路径会多了一些不存在的 ！号   </p>
+<p> \BOOT-INF\classes!/test.log，类似这样。这种问题产生的原因是因为当你打包成 jar 包后，磁盘是没有真实路径的，所以无法通过 FileInputStream 去获取</p>
+</li>
+<li><p>解决方法</p>
+<p>我们可以修改 FileInputStream 为 InputStreamReader,先获取对应文件的 InputStream </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 会指定要加载的资源路径与当前类所在包的路径一致。因此能正常读取文件</span></span><br><span class="line">InputStream stream = getClass().getClassLoader().getResourceAsStream(<span class="string">"文件名"</span>);</span><br><span class="line">bufferedReader in = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(stream, <span class="string">"UTF-8"</span>));</span><br></pre></td></tr></table></figure>
+<p>这样打包成 jar 包后也能正常访问文件了。</p>
+</li>
+</ul>
+<h1 id="完"><a href="#完" class="headerlink" title="完"></a>完</h1><blockquote>
+<p>努力成为一个『不那么差』的程序员 </p>
+</blockquote>
+
       
 
       
@@ -200,16 +260,24 @@
 
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/01/25/SpringBoot-小记/">展开全文 >></a>
-        </p>
-      
 
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2019/01/17/PESC-理解/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">PESC 原则理解</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -224,846 +292,32 @@
         </div>
         
         
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-PESC-理解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/17/PESC-理解/">PESC 原则理解</a>
-    </h1>
-  
-
-        
-        <a href="/2019/01/17/PESC-理解/" class="archive-article-date">
-  	<time datetime="2019-01-16T17:46:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="http://ppe.oss-cn-shenzhen.aliyuncs.com/collections/130/3/thumb.jpg" alt=""></p>
-<h1 id="序"><a href="#序" class="headerlink" title="序"></a>序</h1><p>PECS 原则，是在泛型中定义的一种原则。相对应的是泛型中的通配符概念，即 <strong>&lt; ? extends T &gt;</strong> 和 <strong>&lt; ? super T &gt;</strong></p>
-<p>经常被这个概念搞晕，为了加深印象，决定把自己那一瞬间的感悟记起来。</p>
-        
-          <a class="article-more-a" href="/2019/01/17/PESC-理解/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">JAVA</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">PESC</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/JAVA//" class="article-tag-list-link color5">JAVA</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/JAVA/泛型//" class="article-tag-list-link color3">泛型</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/01/17/PESC-理解/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#序"><span class="toc-number">1.</span> <span class="toc-text">序</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、关于-SpringBoot-静态页面问题"><span class="toc-number">1.1.</span> <span class="toc-text">1、关于 SpringBoot 静态页面问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、jar-包访问-resources-目录下的文件"><span class="toc-number">1.2.</span> <span class="toc-text">2、jar 包访问 resources 目录下的文件</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#完"><span class="toc-number">2.</span> <span class="toc-text">完</span></a></li></ol>
+                    </div>
+                </span>
             </div>
         </div>
         
-        
     </div>
 </aside>
 
 
 
-
-  
-    <article id="post-Association、Collection-的关系" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/14/Association、Collection-的关系/">Association 、Collection区别</a>
-    </h1>
-  
-
-        
-        <a href="/2019/01/14/Association、Collection-的关系/" class="archive-article-date">
-  	<time datetime="2019-01-14T12:25:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-14</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="https://i.loli.net/2019/01/14/5c3c863f2e0a1.jpg" alt="1.jpg"></p>
-<h1 id="序"><a href="#序" class="headerlink" title="序"></a>序</h1><p>最近在做课设时，持久层采用MyBatis，遇到了一些关于 association 和 collection 的问题，现在把它记录一下。</p>
-        
-          <a class="article-more-a" href="/2019/01/14/Association、Collection-的关系/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">MyBatis</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/MyBatis//" class="article-tag-list-link color3">MyBatis</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/01/14/Association、Collection-的关系/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-CVTE" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/10/CVTE/">记 CVTE 面试（凉凉）</a>
-    </h1>
-  
-
-        
-        <a href="/2018/12/10/CVTE/" class="archive-article-date">
-  	<time datetime="2018-12-10T15:12:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="序"><a href="#序" class="headerlink" title="序"></a>序</h1><p>本人大三菜鸡一枚，在因缘巧合下投了 CVTE 的长期实习生计划，顺利过了笔试，一面和二面两轮技术面，最后倒在了 HR 面。</p>
-        
-          <a class="article-more-a" href="/2018/12/10/CVTE/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">乱七八糟</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/现世//" class="article-tag-list-link color3">现世</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/12/10/CVTE/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-LNotes" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/22/LNotes/">LNotes</a>
-    </h1>
-  
-
-        
-        <a href="/2018/11/22/LNotes/" class="archive-article-date">
-  	<time datetime="2018-11-21T16:50:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="https://i.loli.net/2018/11/22/5bf5911bd04e8.jpg" alt="LNotes"></p>
-<h1 id="序"><a href="#序" class="headerlink" title="序"></a>序</h1><p><a href="https://www.luoxy.top/LNotes/#/" target="_blank" rel="noopener">你能看见的 LNotes </a></p>
-        
-          <a class="article-more-a" href="/2018/11/22/LNotes/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">LNotes</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/notes//" class="article-tag-list-link color1">notes</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/11/22/LNotes/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-String的intern操作" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/16/String的intern操作/">String的intern理解</a>
-    </h1>
-  
-
-        
-        <a href="/2018/10/16/String的intern操作/" class="archive-article-date">
-  	<time datetime="2018-10-16T00:49:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="https://i.loli.net/2018/10/16/5bc536e2993d8.jpg" alt="网络配图"></p>
-<h2 id="序"><a href="#序" class="headerlink" title="序"></a>序</h2><p>最近在看周志明的《深入理解JAVA虚拟机》，然后看到一些关于常量池的问题，记录一下自己的所得所感。</p>
-        
-          <a class="article-more-a" href="/2018/10/16/String的intern操作/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">JAVA</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">String</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/JAVA//" class="article-tag-list-link color5">JAVA</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/JAVA/SE//" class="article-tag-list-link color3">SE</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/10/16/String的intern操作/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-springboot-2-0-集成redis" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/04/springboot-2-0-集成redis/">Springboot 2.0 - 集成redis</a>
-    </h1>
-  
-
-        
-        <a href="/2018/10/04/springboot-2-0-集成redis/" class="archive-article-date">
-  	<time datetime="2018-10-04T02:59:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="https://i.loli.net/2018/10/04/5bb584bc59cac.jpg" alt="来源网络"></p>
-<h2 id="序"><a href="#序" class="headerlink" title="序"></a>序</h2><p>最近在入门<code>SpringBoot</code>，然后在感慨 <code>SpringBoot</code>较于<code>Spring</code>真的方便多时，顺便记录下自己在集成<code>redis</code>时的一些想法。</p>
-        
-          <a class="article-more-a" href="/2018/10/04/springboot-2-0-集成redis/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">SpringBoot</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Redis</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/JAVA-WEB//" class="article-tag-list-link color4">JAVA WEB</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/JAVA-WEB/SpringBoot//" class="article-tag-list-link color1">SpringBoot</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/10/04/springboot-2-0-集成redis/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-java中整型的范围" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/06/java中整型的范围/">JAVA中整型的范围</a>
-    </h1>
-  
-
-        
-        <a href="/2018/09/06/java中整型的范围/" class="archive-article-date">
-  	<time datetime="2018-09-06T08:37:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>主题：java中整型的范围</p>
-</blockquote>
-        
-          <a class="article-more-a" href="/2018/09/06/java中整型的范围/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">JAVA</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/JAVA//" class="article-tag-list-link color5">JAVA</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/JAVA/SE//" class="article-tag-list-link color3">SE</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/09/06/java中整型的范围/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-web-xml之头声明" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/29/web-xml之头声明/">web.xml之头声明</a>
-    </h1>
-  
-
-        
-        <a href="/2018/08/29/web-xml之头声明/" class="archive-article-date">
-  	<time datetime="2018-08-29T02:23:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>主题：web.xml头部声明的一些坑</p>
-</blockquote>
-        
-          <a class="article-more-a" href="/2018/08/29/web-xml之头声明/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Servlet</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">web.xml</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/JAVA-WEB//" class="article-tag-list-link color4">JAVA WEB</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/08/29/web-xml之头声明/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Synchronized的底层实现原理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/06/Synchronized的底层实现原理/">Synchronized的底层实现原理</a>
-    </h1>
-  
-
-        
-        <a href="/2018/08/06/Synchronized的底层实现原理/" class="archive-article-date">
-  	<time datetime="2018-08-06T08:36:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>本文简单描述Synchronized的一些实现方式和底层的原理</p>
-        
-          <a class="article-more-a" href="/2018/08/06/Synchronized的底层实现原理/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">多线程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/JAVA//" class="article-tag-list-link color5">JAVA</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/JAVA/多线程//" class="article-tag-list-link color4">多线程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/08/06/Synchronized的底层实现原理/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
   
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
-    </nav>
+  
+
+  
+
+  
+
   
 
 
@@ -1086,8 +340,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
