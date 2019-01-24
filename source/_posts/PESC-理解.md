@@ -9,9 +9,9 @@ categories:
 - 泛型
 ---
 
-# 序
-
 ![](http://ppe.oss-cn-shenzhen.aliyuncs.com/collections/130/3/thumb.jpg)
+
+# 序
 
 PECS 原则，是在泛型中定义的一种原则。相对应的是泛型中的通配符概念，即 **< ? extends T >** 和 **< ? super T >**
 
