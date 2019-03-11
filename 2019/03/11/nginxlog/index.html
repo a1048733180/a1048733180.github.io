@@ -6,18 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https:www.luoxy.top">
-  <title>Archives: 2018/3 | Lxy&#39;s Blog</title>
+  <title>nginxlog | Lxy&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="努力成为一个『不那么差』的程序员">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Lxy&#39;s Blog">
-<meta property="og:url" content="https:www.luoxy.top/archives/2018/03/index.html">
+  <meta name="description" content="序 nginxlog  一个日志可视化工具">
+<meta name="keywords" content="SpringBoot,Nginx">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nginxlog">
+<meta property="og:url" content="https:www.luoxy.top/2019/03/11/nginxlog/index.html">
 <meta property="og:site_name" content="Lxy&#39;s Blog">
-<meta property="og:description" content="努力成为一个『不那么差』的程序员">
+<meta property="og:description" content="序 nginxlog  一个日志可视化工具">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://ppe.oss-cn-shenzhen.aliyuncs.com/collections/137/3/thumb.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/03/11/5c861baab8974.png">
+<meta property="og:updated_time" content="2019-03-11T08:52:31.735Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Lxy&#39;s Blog">
-<meta name="twitter:description" content="努力成为一个『不那么差』的程序员">
+<meta name="twitter:title" content="nginxlog">
+<meta name="twitter:description" content="序 nginxlog  一个日志可视化工具">
+<meta name="twitter:image" content="http://ppe.oss-cn-shenzhen.aliyuncs.com/collections/137/3/thumb.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Lxy&#39;s Blog" type="application/atom+xml">
   
@@ -141,75 +146,143 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-nginxlog" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/03/25/Spring-事务管理/" class="archive-article-date">
-  	<time datetime="2018-03-25T14:59:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-25</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/25/Spring-事务管理/">Spring 事物管理</a>
+    <h1 class="article-title" itemprop="name">
+      nginxlog
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2019/03/11/nginxlog/" class="archive-article-date">
+  	<time datetime="2019-03-11T03:20:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="http://ppe.oss-cn-shenzhen.aliyuncs.com/collections/137/3/thumb.jpg" alt=""></p>
+<h1 id="序"><a href="#序" class="headerlink" title="序"></a>序</h1><p><a href="https://github.com/isLuoxy/nginxlog" target="_blank" rel="noopener"> nginxlog  一个日志可视化工具  </a></p>
+<a id="more"></a>
+<h2 id="1、关于-nginxlog"><a href="#1、关于-nginxlog" class="headerlink" title="1、关于 nginxlog"></a>1、关于 nginxlog</h2><p><strong>nginxlog</strong> ，顾名思义就是跟 nginx 的日志文件有关。这是一个将 nginx log 日志可视化的小工具</p>
+<h2 id="2、-为什么有-nginxlog"><a href="#2、-为什么有-nginxlog" class="headerlink" title="2、 为什么有 nginxlog"></a>2、 为什么有 nginxlog</h2><p>这个当时是放假期间面试某公司时给我的一个小作业，就是将 nginx 日志文件切割以友好的界面展示出来。所以就有了这个 nginxlog。</p>
+<p>当时对这个作业只要求能够运行对应的 jar 包读取就行了。选用的技术栈是 SpringBoot + BootStrap，开发过程中遇到的坑也很多，例如 SpringBoot 的一些页面跳转问题，还有读取 jar 包内的文件问题。关于这些坑，之前已经填完了<a href="https://www.luoxy.top/2019/01/25/SpringBoot-%E5%B0%8F%E8%AE%B0/" target="_blank" rel="noopener">【点击查看】</a>。</p>
+<p>虽说完成了这个功能，但是日志文件是在 jar 包内的，可以说是耦合性高，要用的时候只能把文件添加到项目中，并且修改对应的的文件路径，不是很方便，所以想有没有另外一种方式能够实现同样的功能，同时又能实现以下几点：</p>
+<ol>
+<li>能够读取外部文件，这里的读取是指在 jar 包中读取外部文件，而不用去修改原本 jar 包的内容。</li>
+<li>如果读取的外部文件不存在，有什么优雅点的方法处理错误而不是直接报错。</li>
+</ol>
+<h2 id="3、-nginxlog-的成长"><a href="#3、-nginxlog-的成长" class="headerlink" title="3、 nginxlog 的成长"></a>3、 nginxlog 的成长</h2><p>对于上面的两个需求，难点在于如何 <strong>文件名和文件位置</strong> ，即我们要让这个工具知道文件名是什么，应该从哪里读取文件，才能实现读取功能。</p>
+<p>因为 SpringBoot 支持从配置文件中注入值，采用  @ConfigurationProperties 或者 @Value 注解即可实现，关于这两个的做法这里不仔细讲解，网上有很详细的教程。</p>
+<p>所以我们可以把日志文件的路径放在配置文件中，然后让 SpringBoot 把配置文件的值注入到特定的 bean 属性中，这样就能做到动态指定文件路径。</p>
+<p><img src="https://i.loli.net/2019/03/11/5c861baab8974.png" alt="文件路径的Bean"></p>
+<p>那么现在就是如何动态创建配置文件，而不修改原项目。基本思路是利用 SpringBoot 的命令行启动指定配置文件进行加载，关于 SpringBoot 这个要点就不详细说了，这种指定资源文件的加载存在一个<strong>优先级</strong>的问题，高优先级的配置会覆盖低优先级的配置，所有配置会形成互补配置。<a href="https://docs.spring.io/spring-boot/docs/1.5.9.RELEASE/reference/htmlsingle/#boot-features-external-config" target="_blank" rel="noopener">官方说明</a></p>
+<p>到这里所有问题就解决了，具体思路就是在运行 jar 包时指定一个 配置文件，然后这个配置文件配置 日志的路径，运行时 SpringBoot 会动态将这个配置文件的值注入到特定的 bean 属性中，最后在读取路径时就直接操作这个 bean 中的值，从而实现动态读取文件。</p>
+<p>关于 nginxlog 的介绍就到这了，关于这个工具还存在很多不足和需要优化的地方，有需求还会继续更新的。</p>
+<h1 id="完"><a href="#完" class="headerlink" title="完"></a>完</h1><blockquote>
+<p>努力成为一个『不那么差』的程序员 </p>
+</blockquote>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">SpringBoot</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Nginx</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/JAVA-WEB//" class="article-tag-list-link color4">JAVA WEB</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/JAVA-WEB/Spring//" class="article-tag-list-link color2">Spring</a>
+        			<a href="/categories/Nginx//" class="article-tag-list-link color1">Nginx</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2019/01/25/SpringBoot-小记/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">SpringBoot 小记</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#序"><span class="toc-number">1.</span> <span class="toc-text">序</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、关于-nginxlog"><span class="toc-number">1.1.</span> <span class="toc-text">1、关于 nginxlog</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、-为什么有-nginxlog"><span class="toc-number">1.2.</span> <span class="toc-text">2、 为什么有 nginxlog</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、-nginxlog-的成长"><span class="toc-number">1.3.</span> <span class="toc-text">3、 nginxlog 的成长</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#完"><span class="toc-number">2.</span> <span class="toc-text">完</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -232,8 +305,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
