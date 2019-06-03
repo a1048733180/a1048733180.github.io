@@ -6,18 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https:www.luoxy.top">
-  <title>Archives: 2018 | Lxy&#39;s Blog</title>
+  <title>关于库存问题--超卖问题 | Lxy&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="努力成为一个『不那么差』的程序员">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Lxy&#39;s Blog">
-<meta property="og:url" content="https:www.luoxy.top/archives/2018/index.html">
+  <meta name="description" content="序最近在做一个订单模块，关于支付生成订单减库存大体流程就是 减库存 -&amp;gt; 生成订单 ，那么怎么实现这种功能呢？">
+<meta name="keywords" content="库存">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于库存问题--超卖问题">
+<meta property="og:url" content="https:www.luoxy.top/2019/06/03/关于库存问题-超卖问题/index.html">
 <meta property="og:site_name" content="Lxy&#39;s Blog">
-<meta property="og:description" content="努力成为一个『不那么差』的程序员">
+<meta property="og:description" content="序最近在做一个订单模块，关于支付生成订单减库存大体流程就是 减库存 -&amp;gt; 生成订单 ，那么怎么实现这种功能呢？">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://ppe.oss-cn-shenzhen.aliyuncs.com/collections/147/2/thumb.jpg">
+<meta property="og:updated_time" content="2019-06-03T14:06:35.645Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Lxy&#39;s Blog">
-<meta name="twitter:description" content="努力成为一个『不那么差』的程序员">
+<meta name="twitter:title" content="关于库存问题--超卖问题">
+<meta name="twitter:description" content="序最近在做一个订单模块，关于支付生成订单减库存大体流程就是 减库存 -&amp;gt; 生成订单 ，那么怎么实现这种功能呢？">
+<meta name="twitter:image" content="http://ppe.oss-cn-shenzhen.aliyuncs.com/collections/147/2/thumb.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Lxy&#39;s Blog" type="application/atom+xml">
   
@@ -141,555 +145,143 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-关于库存问题-超卖问题" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      关于库存问题--超卖问题
+    </h1>
+  
+
+        
+        <a href="/2019/06/03/关于库存问题-超卖问题/" class="archive-article-date">
+  	<time datetime="2019-06-03T13:55:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-03</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="http://ppe.oss-cn-shenzhen.aliyuncs.com/collections/147/2/thumb.jpg" alt="泼辣修图"></p>
+<h1 id="序"><a href="#序" class="headerlink" title="序"></a>序</h1><p>最近在做一个订单模块，关于支付生成订单减库存大体流程就是 减库存 -&gt; 生成订单 ，那么怎么实现这种功能呢？</p>
+<a id="more"></a>
+<p>首先，这里暂不对支付模块进行讨论，即不考虑<strong>付款减库存</strong>还是<strong>订单减库存</strong>的情况，单单考虑怎么实现一个高可用的订单模块。</p>
+<p>先来个简单的流程，如果此时只有一个用户的话，那么流程就是客户下达订单，然后查看库存，如果足够的话就减库存，生成对应订单，对应的代码如下</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> 库存 <span class="keyword">from</span> 库存表 <span class="keyword">where</span> good_id = 商品<span class="keyword">id</span>;</span><br><span class="line">if(库存 &lt; 需求量)｛</span><br><span class="line">	return;</span><br><span class="line">｝</span><br><span class="line"><span class="keyword">update</span> 库存表 <span class="keyword">set</span> 库存 = 库存 - 需求量 <span class="keyword">where</span> <span class="keyword">id</span> = 商品<span class="keyword">id</span></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> 订单表（） <span class="keyword">values</span> ();</span><br></pre></td></tr></table></figure>
+<p>流程很简单，就是先查看库存是否满足，不满足直接返回库存不足，购买失败。如果库存充足，那么直接减库存然后生成订单表。</p>
+<blockquote>
+<p>tip：因为这里涉及到多表操作，所以肯定也会涉及到事务。当其中一个操作失败时，根据项目业务需求回滚或者部分提交。</p>
+</blockquote>
+<p>如果有两个人同时购买呢？假设两个人都要购买5件，而此时库存只剩下5件，即只够一个人购买。那么上面的代码逻辑就会出现超卖的现象，下面进行分析</p>
+<p>① 两人（甲、乙）同时查看库存量，发现库存量都为5，满足各自购买需求。</p>
+<p>② 甲先进行 update 操作，此时会对库存表锁表。那么乙同时进行 update 时，会被阻塞。</p>
+<p>③ 甲操作完成后，进行事务提交，此时乙就可以进行 update 操作了，但是此时因为甲已经购买了，进行库存扣减了。此时库存量已经为0了，而乙进行 update 后库存量变成了负数，造成超卖原因。</p>
+<p>根本原因就是同时获取到了库存量，然后进行并发操作，虽然并发操作加了锁，但是再获取库存量时并没有任何保证机制，而这个库存量在并发操作中是个共享变量，所以可以在获取库存量时也加个锁，这样就可以防止超卖现象</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 加排它锁，这样另一个操作在读取时就会被阻塞</span><br><span class="line"><span class="keyword">select</span> 库存 <span class="keyword">from</span> 库存表 <span class="keyword">where</span> good_id = 商品<span class="keyword">id</span> <span class="keyword">from</span> <span class="keyword">update</span>;</span><br><span class="line">......</span><br></pre></td></tr></table></figure>
+<p>这里加了两个锁，其实可以通过一个锁做到</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 在更新的时候加上判断，这样就做到加一次锁实现</span><br><span class="line"><span class="keyword">update</span> 库存表 <span class="keyword">set</span> 库存 = 库存 - 需求量 <span class="keyword">where</span> <span class="keyword">id</span> = 商品<span class="keyword">id</span> <span class="keyword">and</span> 库存 &gt;= 需求量</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> 订单表（） <span class="keyword">values</span> ();</span><br></pre></td></tr></table></figure>
+<p>以上这种做法能够保证不会出现超卖情况</p>
+<h1 id="完"><a href="#完" class="headerlink" title="完"></a>完</h1><blockquote>
+<p> 努力成为一个『不那么差』的程序员 </p>
+</blockquote>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/12/10/CVTE/" class="archive-article-date">
-  	<time datetime="2018-12-10T15:12:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-10</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/12/10/CVTE/">记 CVTE 面试（凉凉）</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">乱七八糟</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">库存</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/现世//" class="article-tag-list-link color3">现世</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/11/22/LNotes/" class="archive-article-date">
-  	<time datetime="2018-11-21T16:50:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-22</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/11/22/LNotes/">LNotes</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">LNotes</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/notes//" class="article-tag-list-link color1">notes</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/10/16/String的intern操作/" class="archive-article-date">
-  	<time datetime="2018-10-16T00:49:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-16</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/10/16/String的intern操作/">String的intern理解</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">JAVA</a>
+        			<a href="/categories/库存//" class="article-tag-list-link color3">库存</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">String</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/JAVA//" class="article-tag-list-link color5">JAVA</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/JAVA/SE//" class="article-tag-list-link color3">SE</a>
+        			<a href="/categories/库存/超卖//" class="article-tag-list-link color3">超卖</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/10/04/springboot-2-0-集成redis/" class="archive-article-date">
-  	<time datetime="2018-10-04T02:59:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-04</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/05/03/Redis-分布式锁/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Redis 分布式锁（一）</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/10/04/springboot-2-0-集成redis/">Springboot 2.0 - 集成redis</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Redis</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">SpringBoot</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/JAVA-WEB//" class="article-tag-list-link color4">JAVA WEB</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/JAVA-WEB/SpringBoot//" class="article-tag-list-link color1">SpringBoot</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#序"><span class="toc-number">1.</span> <span class="toc-text">序</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#完"><span class="toc-number">2.</span> <span class="toc-text">完</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/09/06/java中整型的范围/" class="archive-article-date">
-  	<time datetime="2018-09-06T08:37:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-06</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/09/06/java中整型的范围/">JAVA中整型的范围</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">JAVA</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/JAVA//" class="article-tag-list-link color5">JAVA</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/JAVA/SE//" class="article-tag-list-link color3">SE</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+    </div>
+</aside>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/08/29/web-xml之头声明/" class="archive-article-date">
-  	<time datetime="2018-08-29T02:23:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-29</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/29/web-xml之头声明/">web.xml之头声明</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Servlet</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">web.xml</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/JAVA-WEB//" class="article-tag-list-link color4">JAVA WEB</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/08/06/Synchronized的底层实现原理/" class="archive-article-date">
-  	<time datetime="2018-08-06T08:36:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-06</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/06/Synchronized的底层实现原理/">Synchronized的底层实现原理</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">多线程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/JAVA//" class="article-tag-list-link color5">JAVA</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/JAVA/多线程//" class="article-tag-list-link color4">多线程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/07/19/五-多线程包/" class="archive-article-date">
-  	<time datetime="2018-07-19T08:40:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-19</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/07/19/五-多线程包/">五. 多线程包</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">多线程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/JAVA//" class="article-tag-list-link color5">JAVA</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/JAVA/多线程//" class="article-tag-list-link color4">多线程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/07/19/四-创建线程方式/" class="archive-article-date">
-  	<time datetime="2018-07-19T08:40:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-19</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/07/19/四-创建线程方式/">四. 创建线程方式</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">多线程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/JAVA//" class="article-tag-list-link color5">JAVA</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/JAVA/多线程//" class="article-tag-list-link color4">多线程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/07/19/三-各个关键词的用法/" class="archive-article-date">
-  	<time datetime="2018-07-19T08:39:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-19</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/07/19/三-各个关键词的用法/">三. 各个关键词的用法</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">多线程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/JAVA//" class="article-tag-list-link color5">JAVA</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/JAVA/多线程//" class="article-tag-list-link color4">多线程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
   
-    </div></section>
   
 
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/2018/page/2/">2</a><a class="extend next" rel="next" href="/archives/2018/page/2/">Next &raquo;</a>
-    </nav>
+  
+
+  
+
   
 
 
@@ -713,8 +305,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
