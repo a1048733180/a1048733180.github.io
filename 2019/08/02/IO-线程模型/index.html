@@ -6,18 +6,29 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https:www.luoxy.top">
-  <title>Tag: Spring | Lxy&#39;s Blog</title>
+  <title>IO 线程模型 | Lxy&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="努力成为一个『不那么差』的程序员">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Lxy&#39;s Blog">
-<meta property="og:url" content="https:www.luoxy.top/tags/Spring/index.html">
+  <meta name="description" content="序最近在使用 netty 开发一个聊天室，练手的同时体会 netty  的魅力。记录下基础的 IO 模型。">
+<meta name="keywords" content="IO 模型">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IO 线程模型">
+<meta property="og:url" content="https:www.luoxy.top/2019/08/02/IO-线程模型/index.html">
 <meta property="og:site_name" content="Lxy&#39;s Blog">
-<meta property="og:description" content="努力成为一个『不那么差』的程序员">
+<meta property="og:description" content="序最近在使用 netty 开发一个聊天室，练手的同时体会 netty  的魅力。记录下基础的 IO 模型。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://ppe.oss-cn-shenzhen.aliyuncs.com/collections/4/3/thumb.jpg">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1446087-9522cafa9e14abd0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/552/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1446087-0c604ff4a2d8dc5d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/603/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1446087-3b0399b077daf0a8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/609/format/webp">
+<meta property="og:image" content="https://images0.cnblogs.com/blog/405877/201411/142332350853195.png">
+<meta property="og:image" content="https://images0.cnblogs.com/blog/405877/201411/142333254136604.png">
+<meta property="og:image" content="https://images0.cnblogs.com/blog/405877/201411/151608309061672.jpg">
+<meta property="og:image" content="https://images0.cnblogs.com/blog/405877/201411/142333511475767.png">
+<meta property="og:updated_time" content="2019-08-02T07:08:34.802Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Lxy&#39;s Blog">
-<meta name="twitter:description" content="努力成为一个『不那么差』的程序员">
+<meta name="twitter:title" content="IO 线程模型">
+<meta name="twitter:description" content="序最近在使用 netty 开发一个聊天室，练手的同时体会 netty  的魅力。记录下基础的 IO 模型。">
+<meta name="twitter:image" content="http://ppe.oss-cn-shenzhen.aliyuncs.com/collections/4/3/thumb.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Lxy&#39;s Blog" type="application/atom+xml">
   
@@ -141,75 +152,148 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-IO-线程模型" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/03/25/Spring-事务管理/" class="archive-article-date">
-  	<time datetime="2018-03-25T14:59:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-25</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/25/Spring-事务管理/">Spring 事物管理</a>
+    <h1 class="article-title" itemprop="name">
+      IO 线程模型
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2019/08/02/IO-线程模型/" class="archive-article-date">
+  	<time datetime="2019-08-02T06:24:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-02</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="http://ppe.oss-cn-shenzhen.aliyuncs.com/collections/4/3/thumb.jpg" alt=""></p>
+<h1 id="序"><a href="#序" class="headerlink" title="序"></a>序</h1><p>最近在使用 <code>netty</code> 开发一个聊天室，练手的同时体会 <code>netty</code>  的魅力。记录下基础的 IO 模型。</p>
+<a id="more"></a>
+<h2 id="何为阻塞、非阻塞"><a href="#何为阻塞、非阻塞" class="headerlink" title="何为阻塞、非阻塞"></a>何为阻塞、非阻塞</h2><p>阻塞是指进程被 <code>cpu</code>挂起休息，这里有进程切换上下文的消耗。</p>
+<p>非阻塞是指进程不被挂起，而是会有机率得到时间片被 <code>cpu</code> 调度。（如果此时内核没有准备好数据时，那么此时就相当与空转，浪费 <code>cpu</code> 资源），参考轮询。</p>
+<h2 id="阻塞-I-O"><a href="#阻塞-I-O" class="headerlink" title="阻塞 I/O"></a>阻塞 I/O</h2><p><img src="https://upload-images.jianshu.io/upload_images/1446087-9522cafa9e14abd0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/552/format/webp" alt=""></p>
+<h2 id="非阻塞-I-O（nonblocking-IO）"><a href="#非阻塞-I-O（nonblocking-IO）" class="headerlink" title="非阻塞 I/O（nonblocking IO）"></a>非阻塞 I/O（nonblocking IO）</h2><p><img src="https://upload-images.jianshu.io/upload_images/1446087-0c604ff4a2d8dc5d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/603/format/webp" alt=""></p>
+<p>尽管在 wait for data阶段，revcfrom 不会被阻塞，但是在 copy data from kernel to user 时，还是会阻塞的，所以这也是 同步IO</p>
+<h2 id="IO-多路复用"><a href="#IO-多路复用" class="headerlink" title="IO 多路复用"></a>IO 多路复用</h2><p><img src="https://upload-images.jianshu.io/upload_images/1446087-3b0399b077daf0a8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/609/format/webp" alt=""></p>
+<p>IO 多路复用是使用内核系统的 select 函数，线程要进行 IO 操作时，将需要进行操作的 fd 添加到 select 中，然后阻塞。当数据到达时，socket 被激活，然后返回。此时用户线程正式发起 <code>recvfrom</code> 请求，读取数据并继续执行。</p>
+<blockquote>
+<p>和 同步阻塞区别：</p>
+<p>从流程上看，两者都差不多，不过在 IO 多路复用中，不是发送 <code>recvfrom</code>阻塞，而是调用 select，将 fd 添加到 select 中，由 select 进行通知。此时两者都是阻塞的。</p>
+<p>在计算机上，添加多一个中间层往往是能解决很多问题的。从同步阻塞每个线程进来就要创建一个线程调用 read 操作。而在 IO 多路复用中，每个线程进来只要调用 select，将各自的 fd 添加到 select ，由 select 进行管理通知，避免创建线程的消耗，就能同时处理多个 IO 请求。</p>
+<p>tip： 这里用户线程阻塞于 select 调用，也就是说这还是一个阻塞操作。不过能够更好的支持并发。如果并发量少的话其性能不会比同步阻塞+多线程好。</p>
+<p>在同步非阻塞中，如果出现很多连接，而此时线程数多的话，导致每个线程的时间片少，cpu频繁进行调度，这个线程切换上下文的消耗是非常大的，如果此时说这些消耗能有回报那还能接受，但是大部分情况下，大部分连接是还没有数据的，那么此时消耗可以看作是 线程上下文切换+cpu 空转 的浪费。如果采用同步阻塞，此时没有 cpu 空转的消耗，但是一开始进行线程挂起时也是需要进行上下文切换的，消耗可看作是 线程上下文切换 的浪费。所以出现了 IO 多路复用，针对线程数多的时候，此时使用一个线程来接收、检查多个文件描述符，如果有一个 fd 就绪，则返回给用户线程。此时对就绪状态的用户连接起一个线程处理（使用线程池，减少创建线程消耗），避免频繁的上下文切换。</p>
+</blockquote>
+<p>在非阻塞IO中，如果用户线程能够不轮询，而先忙自己的事，等消息准备好再去处理，就能提高CPU的利用率了，而这种思路用在 IO 多路复用中，就是使用Reactor设计模式。</p>
+<p><img src="https://images0.cnblogs.com/blog/405877/201411/142332350853195.png" alt="来源网络"></p>
+<p>EventHandler 抽象类表示 IO 事件处理器，能通过 <code>get_handler()</code> 获取文件句柄，<code>handle_event()</code>对 Handle 进行读写操作等。继承于 EventHandler 的子类可以对事件做一个定制化处理。而主角 Reactor 用于管理事件，包括事件的注册、删除等，并使用handle_events实现事件循环，不断调用同步事件多路分离器（一般是内核）的多路分离函数select。只要某个文件句柄被激活（可读/写等），<code>select</code> 就返回，<code>handle_events</code>就会调用与文件句柄关联的事件处理器的 <code>handle_event()</code>进行相关操作。</p>
+<p><img src="https://images0.cnblogs.com/blog/405877/201411/142333254136604.png" alt="来源网络"></p>
+<p>​    由于 Reactor 设计模式背后还是使用 select 系统调用，所以总的来说只能称为 异步阻塞IO，也不是真正的 异步 IO，从上图的 read 请求时数据拷贝阻塞用户线程也能知道还是阻塞的。</p>
+<p>如果想做到真正的异步 IO，需要系统内核提供支持，原理就是内核接收到数据后，能够把数据复制到用户态的数据区，再通知用户线程直接使用即可。（或者可以使用内存映射，不用进行内核区数据到用户态数据的复制），在异步IO模型中使用 Proactor 设计模式。</p>
+<p><img src="https://images0.cnblogs.com/blog/405877/201411/151608309061672.jpg" alt="来源网络"></p>
+<p>用户线程将 <code>AsynchronousOperation</code>（读/写等）、<code>Proactor</code> 以及操作完成时的 <code>CompletionHandler</code> 注册到 <code>AsynchronousOperationProcessor</code>,<code>AsynchronousOperationProcessor</code>会提供一组异步 API ，用户线程调用后即可继续执行自己的任务，而不会被阻塞在调用上。<code>AsynchronousOperationProcessor</code>会开启独立的内核线程执行异步操作，实现真正的异步。当异步IO操作完成时，<code>AsynchronousOperationProcessor</code>将用户线程与<code>AsynchronousOperation</code> 一起注册的 <code>Proactor</code> 和 <code>CompletionHandler</code> 取出，然后将 <code>CompletionHandler</code> 与IO操作的结果数据一起转发给 <code>Proactor</code>，<code>Proactor</code> 负责回调每一个异步操作的事件完成处理函数· <code>handle_event</code>。</p>
+<p><img src="https://images0.cnblogs.com/blog/405877/201411/142333511475767.png" alt="来源网络"></p>
+<p>用户线程调用异步 API read() ，将 <code>AsynchronousOperatio、Proactor、CompletionHandler</code> 注册到内核，然后直接返回。操作系统开启独立的内核线程去处理 IO 操作。当 read 请求的数据到达时，由内核负责读取数据，并写入用户态的数据区中。最后内核将 read 的数据和用户线程注册的 <code>CompletionHandler</code> 分发给内部<code>Proactor</code>，<code>Proactor</code> 将IO完成的信息通知给用户线程（一般通过调用用户线程注册的完成事件处理函数），完成异步IO。</p>
+<h1 id="完"><a href="#完" class="headerlink" title="完"></a>完</h1><blockquote>
+<p>努力成为一个『不那么差』的程序员 </p>
+</blockquote>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">IO 模型</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/JAVA-WEB//" class="article-tag-list-link color4">JAVA WEB</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/JAVA-WEB/Spring//" class="article-tag-list-link color2">Spring</a>
+        			<a href="/categories/IO-模型//" class="article-tag-list-link color1">IO 模型</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2019/06/03/关于库存问题-超卖问题/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">关于库存问题--超卖问题</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#序"><span class="toc-number">1.</span> <span class="toc-text">序</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#何为阻塞、非阻塞"><span class="toc-number">1.1.</span> <span class="toc-text">何为阻塞、非阻塞</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#阻塞-I-O"><span class="toc-number">1.2.</span> <span class="toc-text">阻塞 I/O</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#非阻塞-I-O（nonblocking-IO）"><span class="toc-number">1.3.</span> <span class="toc-text">非阻塞 I/O（nonblocking IO）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IO-多路复用"><span class="toc-number">1.4.</span> <span class="toc-text">IO 多路复用</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#完"><span class="toc-number">2.</span> <span class="toc-text">完</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -232,9 +316,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
