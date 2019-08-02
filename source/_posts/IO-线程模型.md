@@ -2,7 +2,7 @@
 title: IO 线程模型
 date: 2019-08-02 14:24:17
 tags: IO 模型
-categories： IO 模型
+categories: IO 模型
 ---
 
 ![](http://ppe.oss-cn-shenzhen.aliyuncs.com/collections/4/3/thumb.jpg)
