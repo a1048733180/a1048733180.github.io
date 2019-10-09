@@ -49,10 +49,8 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
 
 ![](<https://i.loli.net/2019/10/09/Z8YgXHJhS2BQWjy.png>)
 
-## 
 
 从语义可以看出这个是入站程序适配器，那么自然还有个出站程序适配器，这里先不对这两个类做详细分析。
-
 
 
 通常在这个 `handler` 中我们就可以进行一系列的逻辑操作，可以针对不同的消息类型作出对应的处理。但这样就不符合单一原则。而且 `Netty` 官方也提供了模块化处理，通过 `pipline` 和 `channelHandler`，运用责任链设计模式，形成一个业务逻辑链，处理对应的业务逻辑。
