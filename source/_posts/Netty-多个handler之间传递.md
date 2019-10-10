@@ -59,7 +59,7 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
 
 ## Pipline
 
-![图片来自掘金小册《[Netty 入门与实战：仿写微信 IM 即时通讯系统]》](https://user-gold-cdn.xitu.io/2018/8/17/1654526f0a67bb52?imageslim)
+![图片来自掘金小册《[Netty 入门与实战：仿写微信 IM 即时通讯系统]》](https://i.loli.net/2019/10/10/H4wgyIfJAvhWSKc.png)
 
 这里借用掘金小册《[Netty 入门与实战：仿写微信 IM 即时通讯系统](https://juejin.im/book/5b4bc28bf265da0f60130116)》 的一个插图，每个连接对应一个 `channel`，每个`channel`都有其自己的`pipeline`，并且在创建新通道时会自动创建它。此外 `handler`、`ChannelHandlerContext`、`pipeline` 之间是什么关系呢？
 
